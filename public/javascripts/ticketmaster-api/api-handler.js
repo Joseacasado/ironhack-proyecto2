@@ -2,7 +2,7 @@ class EventsApiHandler {
   constructor () {
     console.log('API handler initialized')
 
-    this.axiosApp = axios.create({ baseURL: `https://app.ticketmaster.com/discovery/v2/events.json?apikey=jB9GX5ZTKP9G2k8SqGVvrV9q9UkpNl5P&segmentName=Music`})
+    this.axiosApp = axios.create({ baseURL: `https://app.ticketmaster.com/discovery/v2/events.json?apikey=__ticketMaster_ApiKey__&segmentName=Music`})
   }
 
   getEventsList = filterinfo => this.axiosApp.get(`&city=${ filterinfo.city }&classificationName=${ filterinfo.genre }&sort=${ filterinfo.sort }&keyword=${ filterinfo.keyword }`)
