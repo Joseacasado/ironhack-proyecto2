@@ -1,3 +1,5 @@
 module.exports = app => {
     app.locals.title = 'La Ruta del Calimocho'
+    app.locals.mapsKey = `${process.env.GOOGLEMAPS_API}`
+    app.locals.ticketKey = `${process.env.TM_API}`
 }

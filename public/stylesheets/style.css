@@ -1,12 +1,30 @@
 body {
   font-family: sans-serif;
-  font-size: 14px; }
+  font-size: 14px;
+  color: whitesmoke;
+  background: #000000;
+  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #434343, #000000);
+  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #434343, #000000);
+  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */ }
 
 img {
   width: 100%; }
 
 .navbar {
-  margin-bottom: 40px;
   padding: 1rem 2rem; }
+
+.card-body {
+  color: black; }
+
+.card-list img {
+  height: 100px;
+  object-fit: cover; }
+
+#eventMap {
+  height: 400px;
+  margin: 1rem;
+  background-color: pink; }
 
 /*# sourceMappingURL=style.css.map */
