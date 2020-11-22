@@ -1,25 +1,25 @@
-const { text } = require('body-parser')
-const monoogose = require('mongoose')
-const Schema = monoogose.Schema
+const mongoose = require("mongoose")
+const Schema = mongoose.Schema
 
 const userSchema = new Schema({
-  name: {
-    type: String,
-    set: text => text.charAt(0).toUpperCase() + text.substring(1)
-  },
-  username: {
-    type: String,
-    required: true,
-    unique: true
-  },
+  username: String,
   password: String,
-  email: {
-    type: String,
-    required: true,
-    unique: true
+  fullname: String,
+  email: String,
+  avatar: { type: String, default: 'https://www.cmcaindia.org/wp-content/uploads/2015/11/default-profile-picture-gmail-2.png' },
+  isAdmin: { type: Boolean, default: false },
+  events: {
+    attend: [{
+      type: Schema.Types.ObjectId,
+      ref: 'events'
+    }],
+    interest: [{
+      type: Schema.Types.ObjectId,
+      ref: 'events'
+    }]
   }
 }, { timestamps: true })
 
-const User = monoogose.model('User', userSchema)
+const User = mongoose.model("User", userSchema)
 
 module.exports = User

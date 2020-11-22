@@ -12,7 +12,7 @@ const storage = new CloudinaryStorage({
   cloudinary: cloudinary,
   params: {
     folder: 'proyecto2-ironhack',
-    format: async (req, file) => 'jpg'
+    format: async (req, file) => 'jpeg'
   }
 })
 

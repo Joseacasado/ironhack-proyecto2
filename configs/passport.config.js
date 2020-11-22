@@ -3,14 +3,14 @@ const bcrypt = require("bcryptjs")
 const passport = require("passport")
 const LocalStrategy = require("passport-local").Strategy
 
-const flash = require("connect-flash") 
+const flash = require("connect-flash")          // error control
 
 const User = require('./../models/user.model')
 
 module.exports = app => {
 
   app.use(session({
-    secret: "proyecto2",
+    secret: "webmad1020",
     resave: true,
     saveUninitialized: true
   }))
@@ -24,7 +24,7 @@ module.exports = app => {
     })
   })
 
-  app.use(flash())
+  app.use(flash())             // error control
 
   passport.use(new LocalStrategy({ passReqToCallback: true }, (req, username, password, next) => {
     User.findOne({ username }, (err, user) => {
@@ -32,7 +32,7 @@ module.exports = app => {
         return next(err);
       }
       if (!user) {
-        return next(null, false, { message: "Usario no registrado" })
+        return next(null, false, { message: "Uusario no registrado" })
       }
       if (!bcrypt.compareSync(password, user.password)) {
         return next(null, false, { message: "Contraseña incorrecta" })
@@ -44,4 +44,6 @@ module.exports = app => {
 
   app.use(passport.initialize())
   app.use(passport.session())
+
+
 }

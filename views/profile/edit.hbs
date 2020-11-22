@@ -1,0 +1,41 @@
+<div class="container">
+
+    <div class="row justify-content-center">
+
+        <div class="col-md-7">
+
+            <h1>Edit Profile</h1>
+
+            <form method="POST" action="/profile/edit" enctype="multipart/form-data">
+                <div class='form-group'>
+                    <figure>
+                        <img src="{{user.avatar}}" style="width: 200px; background-color: aliceblue;"
+                            alt="{{user.username}}">
+                    </figure>
+                    <div class="custom-file">
+                        <input name="imageFile" type="file" class="custom-file-input" id="imageFile">
+                        <label class="custom-file-label" for="imageFile">Select image</label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Fullname</label>
+                    <input type="text" class="form-control" name="fullname" value="{{user.fullname}}">
+                </div>
+                <div class="form-group">
+                    <label>Username</label>
+                    <input type="text" class="form-control" name="username" value="{{user.username}}">
+                </div>
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" class="form-control" name="email" value="{{user.email}}">
+                </div>
+                <button type="submit" class="btn btn-dark">Save</button>
+            </form>
+        </div>
+    </div>
+    <script></script>
+    
+
+
+
+</div>
