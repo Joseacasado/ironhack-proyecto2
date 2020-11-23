@@ -1,27 +1,75 @@
 const monoogose = require('mongoose')
 const Schema = monoogose.Schema
 
+
 const eventSchema = new Schema({        // TO-DO
-  title: {
-    type: String,
-    required: true
+
+  name: String,
+  type: String,
+  test: Boolean,
+  url: String,
+  locale: String,
+  images: [
+    {
+      ratio: String,
+      url: String,
+      width: Number,
+      height: Number,
+      fallback: Boolean
+    }
+  ],
+  dates: {
+    start: {
+      localDate: String,
+      localTime: String,
+    },
+    timezone: String,
   },
-  description: String,
-  free: Boolean,
-  price: Number,
-  dtstart: Date,   
-  dtend: Date,   
-  link: String,
-  image: String,
-  address: {
-    postalCode: String,
-    required: true
-  },
-  location: {
-    type: { type: String },
-    coordinates: [ Number ],
-    required: true
+  classifications: [
+    {
+      genre: {
+        name: String
+      },
+      subGenre: {
+        name: String
+      },
+    }
+  ],
+  info: String,
+  priceRanges: [
+    {
+      type: { type: String },
+      currency: String,
+      min: Number,
+      max: Number
+    }
+  ],
+  _embedded: {
+    venues: [
+      {
+        postalCode: String,
+        timezone: String,
+        city: {
+          name: String
+        },
+        country: {
+          name: String,
+          countryCode: String
+        },
+        address: {
+          line1: String
+        },
+        location: {
+          type: {
+            type: String,
+          },
+          longitude: Number,
+          latitude: Number
+        },
+      }
+    ],
   }
+
 }, { timestamps: true })
 
 eventSchema.index({ location: '2dsphere' })
