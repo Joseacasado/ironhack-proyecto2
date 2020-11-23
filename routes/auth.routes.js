@@ -45,14 +45,14 @@ router.post('/signup', [
     const hashPass = bcrypt.hashSync(password, salt)
 
     User.create({ username, password: hashPass, email })
-        .then(() => res.redirect('/'))
+        .then(() => res.redirect('/shows'))
         .catch(() => res.render("auth/signup", { errorMsg: "There was an error. Please try again." }))
 })
 
 router.get('/login', (req, res, next) => res.render('auth/login'))
 
 router.post("/login", passport.authenticate("local", {
-    successRedirect: "/",
+    successRedirect: "/shows",
     failureRedirect: "/login",
     failureFlash: true,
     passReqToCallback: true
