@@ -2,14 +2,14 @@ const eventDetailsApiHandler = new EventsApiHandler()
 
 window.onload = () => {
   const id = document.querySelector('#eventIdFinal').value
-  
+
   eventDetailsApiHandler
     .getEventDetails(id)
     .then(response => {
-      let event = response.data._embedded.events[ 0 ]
-      
+      let event = response.data._embedded.events[0]
+
       console.log(event)
-      
+
       document.querySelector('#eventDetailsContainer').innerHTML = `<div class="row justify-content-center align-items-center">
 
                                                                       <div class="col-md-4 event-details-img">
