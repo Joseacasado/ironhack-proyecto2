@@ -1,0 +1,101 @@
+{{!-- API SEARCH NAV --}}
+<nav class="nav bg-dark">
+
+  <div class="container">
+
+    <form id="event-search">
+      <div class="row justify-content-between">
+
+        <div class="col-md-3">
+          <div class='form-group'>
+            {{!-- <label for='keywordInput'>Keyword</label> --}}
+            <input id="keywordInput" type='text' class='form-control' placeholder="Maroon 5">
+            <small id='keywordHelp' class='form-text text-muted'>Artist</small>
+          </div>
+        </div>
+
+        <div class="col-md-2">
+          <div class='form-group'>
+            {{!-- <label for='cityInput'>City</label> --}}
+            <input id="cityInput" type='text' class='form-control' placeholder="Madrid">
+            <small id='cityHelp' class='form-text text-muted'>City</small>
+          </div>
+        </div>
+
+        <div class="col-md-2">
+          <div class='form-group'>
+            {{!-- <label for='genreInput'>Genre</label> --}}
+            <input id="genreInput" type='text' class='form-control' placeholder="Rock">
+            <small id='genreHelp' class='form-text text-muted'>Genre</small>
+          </div>
+        </div>
+        
+        <div class="col-md-2">
+          <div class="form-group">
+            {{!-- <label for='sortInput'>Sorting</label> --}}
+            <select id="sortInput" class="form-control">
+              <option value="name,asc">Sort by...</option>
+              <option value="date,asc">Date ascending</option>
+              <option value="date,desc">Date descending</option>
+              <option value="distance,asc">Distance</option>
+            </select>
+            <small id='sortingHelp' class='form-text text-muted'>Sort</small>
+          </div>
+        </div>
+
+        <div class="col-md-2">
+          <button type='submit' class='btn btn-outline-warning'>Aply filters</button>
+        </div>
+
+      </div>
+    </form>
+  </div>
+</nav>
+
+{{!-- SLIDER --}}
+
+<div class="container">
+  <div class="tm-hero" w-type="event-discovery" w-tmapikey="{{ticketKey}}" w-googleapikey="{{mapsKey}}" w-keyword="" w-theme="simple" w-colorscheme="light" w-width="100%" w-height="550" w-size="25" w-border="" w-borderradius="5" w-postalcode="" w-radius="25" w-city="" w-period="week" w-layout="fullwidth" w-attractionid="" w-promoterid="" w-venueid="" w-affiliateid="" w-segmentid="KZFzniwnSyZfZ7v7nJ" w-proportion="custom" w-titlelink="off" w-sorting="groupByName" w-id="id_1mnfek" w-countrycode="ES" w-source="" w-branding="Ticketmaster" w-latlong=""></div>
+</div>
+
+<hr>
+
+<div class="container">
+
+  <div id="card-list" class="row justify-content-center">
+    {{#each events}}
+      <div class="col-md-6 col-lg-4">
+        <div class="card mb-2" style="width: 18rem;">
+          {{#with images}}
+          <img src="{{this.[2].url}}" class="card-img-top" alt="{{name}}">
+          {{/with}}
+          <div class="card-body">
+            <h5 class="card-title">{{name}}</h5>
+            <p class="card-text">
+              {{dates.start.localDate}} |
+              {{#with _embedded.venues}}
+                <strong>{{this.[0].city.name}}</strong>
+              {{/with}}
+            </p>
+            <a href="/shows-crud/details/{{_id}}" class="btn btn-dark d-block event-details-btn">See more</a> 
+          </div>
+        </div>
+      </div>
+    {{/each}}
+  </div>
+
+</div>
+
+
+
+
+
+
+
+
+{{!-- <script src="https://unpkg.com/axios/dist/axios.min.js"></script> --}}
+
+<script src="https://ticketmaster-api-staging.github.io/products-and-docs/widgets/event-discovery/1.0.0/lib/main-widget.js"></script>
+{{!-- 
+<script src="/javascripts/ticketmaster-api/api-handler.js"></script>
+<script src="/javascripts/ticketmaster-api/index.js"></script> --}}
