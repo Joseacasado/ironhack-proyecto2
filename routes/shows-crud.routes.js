@@ -8,18 +8,18 @@ const CDNupload = require('./../configs/cdn-upload.config')
 router.get('/', (req, res, next) => {
   Event
     .aggregate([ {$sample: { size: 40 }} ])
-    .then(events => res.render('shows-crud/', { events }))
+    .then(events => res.render('shows-crud/', { events, isLogged: req.isAuthenticated() }))
     .catch(err => new Error(next(err)))
 })
 
 router.get('/details/:id', (req, res, next) => {
   Event
     .findById(req.params.id)
-    .then(event => res.render('shows-crud/details', event))
+    .then(event => res.render('shows-crud/details', { event, isLogged: req.isAuthenticated() }))
     .catch(err => new Error(next(err)))
 })
 
-router.get('/create', (req, res) => res.render('shows-crud/create'))
+router.get('/create', (req, res) => res.render('shows-crud/create', { isLogged: req.isAuthenticated() }))
 
 router.post('/create', CDNupload.single('eventImageFile'), (req, res, next) => {
   const { name, date, venue, price, currency, url, latitude, longitude, info } = req.body
@@ -28,16 +28,17 @@ router.post('/create', CDNupload.single('eventImageFile'), (req, res, next) => {
     .create(
       {
         name, url, info,
-        'dates.$.start.localDate': date,
-        'priceRanges.$.max': price,
-        'priceRanges.$.currency': currency,
-        '_embedded.venues.$.location.latitude': latitude,
-        '_embedded.venues.$.location.longitude': longitude,
-        // 'images.$.url': imageUrl 
+        'dates.0.start.localDate': date,
+        '_embedded.venues.0.name': venue,
+        'priceRanges.0.max': price,
+        'priceRanges.0.currency': currency,
+        '_embedded.venues.0.location.latitude': latitude,
+        '_embedded.venues.0.location.longitude': longitude,
+        // 'images.0.url': imageUrl 
       })
     .then(response => {
       console.log(response)
-      res.redirect('/shows-crud')
+      res.redirect('/shows-crud', { succesMsg: 'Event created!'})
     })
     .catch(err => new Error(next(err)))
 })
@@ -45,23 +46,25 @@ router.post('/create', CDNupload.single('eventImageFile'), (req, res, next) => {
 router.get('/:id/edit', (req, res) => {
   Event
     .findById(req.params.id)
-    .then(response => res.render('shows-crud/edit', response))
+    .then(event => res.render('shows-crud/edit', { event, isLogged: req.isAuthenticated() }))
     .catch(err => new Error(next(err)))
 })
 
 router.post('/:id/edit', CDNupload.single('eventImageFile'), (req, res, next) => {
   const { name, date, venue, price, currency, url, latitude, longitude, info } = req.body
+  const eventId = req.params.id
   // const imageUrl = req.file.path
   Event
-    .findByIdAndUpdate(req.params.id,
+    .findByIdAndUpdate(eventId,
       {
         name, url, info,
-        'dates.$.start.localDate': date,
-        'priceRanges.$.max': price,
-        'priceRanges.$.currency': currency,
-        '_embedded.venues.$.location.latitude': latitude,
-        '_embedded.venues.$.location.longitude': longitude,
-        // 'images.$.url': imageUrl 
+        'dates.0.start.localDate': date,
+        '_embedded.venues.0.name': venue,
+        'priceRanges.0.max': price,
+        'priceRanges.0.currency': currency,
+        '_embedded.venues.0.location.latitude': latitude,
+        '_embedded.venues.0.location.longitude': longitude,
+        // 'images.0.url': imageUrl 
       })
     .then(() => res.redirect('back'))
     .catch(err => new Error(next(err)))

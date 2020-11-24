@@ -4,7 +4,7 @@
       <h1>Edit event</h1>
 
       <hr>
-      
+      {{#with event}}
       <form action='/shows-crud/create' method='POST'>
         <div class='form-group'>
           <label for='name'>Name</label>
@@ -68,6 +68,7 @@
           <button type='submit' class='btn btn-dark d-block'>Edit Event</button>
           <a class="btn btn-danger btn-lg" href="/shows-crud/{{id}}/delete">Delete event</a>
         </div>
+        {{/with}}
 
         {{#if errorMsg}}
           {{errorMsg}}

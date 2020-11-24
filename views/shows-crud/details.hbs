@@ -4,9 +4,8 @@
     <div class="row justify-content-center align-items-center">
 
           <div class="col-md-4 event-details-img">
-            {{#with images}}
-            <figure><img src="{{this.[0].url}}" alt="{{name}}"></figure>
-            {{/with}}
+            {{#with event}}
+            <figure><img src="{{images.2.url}}" alt="{{name}}"></figure>
             <figcaption></figcaption>
           </div>
 
@@ -15,20 +14,20 @@
             <hr>
             <ul>
               <li>Date: {{dates.start.localDate}}</li>
-              {{#with _embedded.venues}}
-              <li>Venue: {{this.[0].name}}</li>
-              <li>City: {{this.[0].city.name}}</li>
-              {{/with}}
-              {{#with priceRanges}}
-              <li>Price: {{this.[0].max}} - {{this.[0].currency}}</li>
-              {{/with}}
+              <li>Venue: {{_embedded.venues.0.name}}</li>
+              <li>City: {{_embedded.venues.0.city.name}}</li>
+              <li>Price: {{priceRanges.0.max}} - {{priceRanges.0.currency}}</li>
             </ul>
             <hr>
             <p><strong>Description:</strong> {{info}}</p>
             <hr>
             <a class="btn btn-warning btn-lg" href="{{url}}" target="_blank">Buy tickets</a>
-            <a class="btn btn-info btn-lg" href="/shows-crud/{{id}}/edit">Edit event</a>
-            <a class="btn btn-danger btn-lg" href="/shows-crud/{{id}}/delete">Delete event</a>
+            {{/with}}
+            {{#if isLogged}}
+            <a class="btn btn-info btn-lg" href="/shows-crud/{{event.id}}/edit">Edit event</a>
+            <a class="btn btn-danger btn-lg" href="/shows-crud/{{event.id}}/delete">Delete event</a>
+            {{/if}}
+          
           </div>
         </div>
 
