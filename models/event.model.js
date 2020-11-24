@@ -47,6 +47,7 @@ const eventSchema = new Schema({        // TO-DO
   _embedded: {
     venues: [
       {
+        name: String,
         postalCode: String,
         timezone: String,
         city: {
