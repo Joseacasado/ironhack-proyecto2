@@ -7,6 +7,7 @@ module.exports = app => {
     app.use('/shows', require('./shows.routes.js'))
     app.use('/api', require('./api.routes.js'))
     app.use('/filter', require('./filter.routes.js'))
+    app.use('/shows-crud', require('./shows-crud.routes.js'))
     app.use('/', ensureAuthenticated, require('./profile.routes.js'))
 
     // API Shows

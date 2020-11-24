@@ -1,0 +1,71 @@
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <h1>Create new event</h1>
+
+      <hr>
+      
+      <form action='/shows-crud/create' method='POST'>
+        <div class='form-group'>
+          <label for='name'>Name</label>
+          <input type='text' class='form-control' id='name' name="name" placeholder="Event name" required>
+        </div>
+        <div class="custom-file">
+            <label class="custom-file-label" for="eventImageFile">Select image</label>
+            <input name="eventImageFile" type="file" class="custom-file-input" id="eventImageFile">
+        </div>
+
+        <div class="form-row">
+          <div class="col-md-6 mb-3">
+            <label for="date">Date</label>
+            <input type="date" class="form-control" id="date" name="date">
+          </div>
+          <div class="col-md-6 mb-3">
+            <label for="venue">Venue</label>
+            <input type="text" class="form-control" id="venue" name="venue" placeholder="Wizink Center">
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="col-md-6 mb-3">
+            <label for="price">Price</label>
+            <input type="number" class="form-control" id="price" name="price" min="0" placeholder="20">
+          </div>
+          <div class="col-md-6 mb-3">
+            <label for="currency">Currency</label>
+            <input type="text" class="form-control" id="currency" name="currency" placeholder="EUR">
+          </div>
+        </div>
+
+        <div class='form-group'>
+          <label for='url'>Tickets Url</label>
+          <input type='text' class='form-control' id='url' name="url" placeholder="Tickets sales link">
+        </div>
+
+        <div class="form-row">
+          <div class="col-md-6 mb-3">
+            <label for="latitude">Latitude</label>
+            <input type="number" class="form-control" id="latitude" name="latitude" placeholder="40.392499">
+          </div>
+          <div class="col-md-6 mb-3">
+            <label for="longitude">Longitude</label>
+            <input type="number" class="form-control" id="longitude" name="longitude" placeholder="-3.698214">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="info">Description</label>
+          <textarea name="info" id="info" cols="100" rows="4"></textarea>
+        </div>
+
+        <div class="form-group">
+          <button type='submit' class='btn btn-dark d-block'>Create Event</button>
+        </div>
+
+        {{#if errorMsg}}
+          {{errorMsg}}
+        {{/if}}
+      </form>
+    </div>
+  </div>
+</div>

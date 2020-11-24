@@ -3,7 +3,7 @@ const id = document.querySelector('#eventIdFinal').value
 
 function initApp() {
   drawMap()
-  getEventLocation(id)
+  // getEventLocation(id)
 }
 
 function drawMap() {

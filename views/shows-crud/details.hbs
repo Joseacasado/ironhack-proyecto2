@@ -1,0 +1,49 @@
+
+<div class="container">
+  <div id="eventDetailsContainer">
+    <div class="row justify-content-center align-items-center">
+
+          <div class="col-md-4 event-details-img">
+            {{#with images}}
+            <figure><img src="{{this.[0].url}}" alt="{{name}}"></figure>
+            {{/with}}
+            <figcaption></figcaption>
+          </div>
+
+          <div class="col-md-8">
+            <h2>{{name}}</h2>
+            <hr>
+            <ul>
+              <li>Date: {{dates.start.localDate}}</li>
+              {{#with _embedded.venues}}
+              <li>Venue: {{this.[0].name}}</li>
+              <li>City: {{this.[0].city.name}}</li>
+              {{/with}}
+              {{#with priceRanges}}
+              <li>Price: {{this.[0].max}} - {{this.[0].currency}}</li>
+              {{/with}}
+            </ul>
+            <hr>
+            <p><strong>Description:</strong> {{info}}</p>
+            <hr>
+            <a class="btn btn-warning btn-lg" href="{{url}}" target="_blank">Buy tickets</a>
+            <a class="btn btn-info btn-lg" href="/shows-crud/{{id}}/edit">Edit event</a>
+            <a class="btn btn-danger btn-lg" href="/shows-crud/{{id}}/delete">Delete event</a>
+          </div>
+        </div>
+
+    {{!-- <button id="eventIdFinal" value="{{Id}}"></button> --}}
+  </div>
+
+  <div id="eventMap"></div>
+
+</div>
+
+
+
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+{{!-- <script src="/javascripts/ticketmaster-api/api-handler.js"></script>
+<script src="/javascripts/ticketmaster-api/event-details.js"></script> --}}
+<script src="/javascripts/shows-crud/event-map.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key={{mapsKey}}&callback=initApp"></script>

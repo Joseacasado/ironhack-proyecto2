@@ -2,7 +2,7 @@ const monoogose = require('mongoose')
 const Schema = monoogose.Schema
 
 
-const eventSchema = new Schema({        // TO-DO
+const eventSchema = new Schema({ 
 
   name: String,
   type: String,
