@@ -1,5 +1,6 @@
+const eventDetailsApiHandler = new EventsApiHandler()
 let mapInstance
-const id = document.querySelector('#eventId').value
+const id = document.querySelector('#eventId-map').innerText
 
 function initApp() {
   drawMap()
@@ -13,15 +14,18 @@ function drawMap() {
 function getEventLocation(id) {
   eventDetailsApiHandler
     .getEventDetails(id)
-    .then(response => drawMarker(response.data._embedded.events[ 0 ]))
+    .then(response => {
+      console.log('¡Este mensaje viene desde cliente!!', response)
+      drawMarker(response.data)
+    })
     .catch(err => console.log(err))
 }
 
 function drawMarker(event) {
   let eventLocation = event._embedded.venues[ 0 ].location
   let eventPosition = {
-    lat: Number(eventLocation.latitude),
-    lng: Number(eventLocation.longitude)
+    lat: eventLocation.latitude,
+    lng: eventLocation.longitude
   }
   let eventTitle = event.name
 

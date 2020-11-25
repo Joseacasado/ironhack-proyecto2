@@ -1,8 +1,4 @@
 document.addEventListener('DOMContentLoaded', () => {
-
-  console.log('IronGenerator JS imported successfully!');
-
-
   let successMsg = document.querySelector('.successMsg span')
 
   successMsg ? setTimeout(() => {

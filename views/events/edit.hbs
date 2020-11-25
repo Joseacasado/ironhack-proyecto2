@@ -8,7 +8,7 @@
             <h1>Edit event</h1>
           </div>
           {{#with event}}
-          <div class="col-md-4">
+          <div class="col-md-5">
             <button class="btn btn-outline-warning event-pic-btn">Upload Event Picture</button>
             <form method="POST" action="/events/edit/picture?id={{id}}" class="pic-form hide" enctype="multipart/form-data">
                 <div class="custom-file">
@@ -24,9 +24,15 @@
 
       <hr>
       <form action='/events/{{id}}/edit' method='POST'>
-        <div class='form-group'>
-          <label for='name'>Name</label>
-          <input type='text' class='form-control' id='name' name="name" value="{{name}}" required >
+        <div class="form-row">
+          <div class="col-md-6 mb-3">
+            <label for='name'>Name</label>
+            <input type='text' class='form-control' id='name' name="name" value="{{name}}">
+          </div>
+          <div class="col-md-6 mb-3">
+            <label for="genre">Genre</label>
+            <input type="text" class="form-control" id="genre" name="genre" value="{{classifications.0.genre.name}}">
+          </div>
         </div>
 
         <div class="form-row">
@@ -35,10 +41,19 @@
             <input type="date" class="form-control" id="date" name="date" value="{{dates.start.localDate}}">
           </div>
           <div class="col-md-6 mb-3">
-            {{#with _embedded.venues.[0]}}
+            <label for="time">Time</label>
+            <input type="time" class="form-control" id="time" name="time" value="{{dates.start.localTime}}">
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="col-md-6 mb-3">
+            <label for="city">City</label>
+            <input type="text" class="form-control" id="city" name="city" value="{{_embedded.venues.0.city.name}}">
+          </div>
+          <div class="col-md-6 mb-3">
             <label for="venue">Venue</label>
-            <input type="text" class="form-control" id="venue" name="venue" value="{{name}}">
-            {{/with}}
+            <input type="text" class="form-control" id="venue" name="venue" value="{{_embedded.venues.0.name}}">
           </div>
         </div>
 

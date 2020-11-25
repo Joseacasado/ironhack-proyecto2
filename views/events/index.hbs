@@ -23,7 +23,6 @@
 
                     <div class="col-md-2">
                         <div class='form-group'>
-                            {{!-- <label for='cityInput'>City</label> --}}
                             <input id="cityEvent" type='text' name="city" class='form-control' placeholder="Madrid">
                             <small id='cityHelp' class='form-text text-muted'>City</small>
                         </div>
@@ -31,7 +30,6 @@
 
                     <div class="col-md-2">
                         <div class='form-group'>
-                            {{!-- <label for='genreInput'>Genre</label> --}}
                             <input id="genreEvent" type='text' name="genre" class='form-control' placeholder="Punk">
                             <small id='genreHelp' class='form-text text-muted'>Genre</small>
                         </div>
@@ -39,7 +37,6 @@
 
                     <div class="col-md-2">
                         <div class='form-group'>
-                            {{!-- <label for='genreInput'>Genre</label> --}}
                             <input id="priceMin" type='text' name="priceMin" class='form-control' placeholder="min">
                             <small id='priceMinHelp' class='form-text text-muted'>Min price</small>
                         </div>
@@ -47,14 +44,13 @@
 
                     <div class="col-md-2">
                         <div class='form-group'>
-                            {{!-- <label for='genreInput'>Genre</label> --}}
                             <input id="priceMax" type='text' name="priceMax" class='form-control' placeholder="max">
                             <small id='priceMaxHelp' class='form-text text-muted'>Max price</small>
                         </div>
                     </div>
 
                     <div class="col-md-2">
-                        <button type='submit' class='btn btn-outline-warning'>Aply filters</button>
+                        <button type='submit' class='btn btn-warning'>Aply filters</button>
                     </div>
 
                 </div>
@@ -62,23 +58,21 @@
         </div>
     </nav>
 
-
-
     <div id="card-list" class="row justify-content-center">
         {{#each events}}
         <div class="col-md-6 col-lg-4">
-            <div class="card mb-2" style="width: 18rem;">
-                <img src="{{images.0.url}}" class="card-img-top" alt="${elm.name}">
+            <div class="card mt-3">
+                <img src="{{images.0.url}}" class="card-img-top" alt="{{elm.name}}">
                 <div class="card-body">
                     <h5 class="card-title">{{name}}</h5>
-                    <p class="card-text">{{ dates.start.localDate }} || {{ _embedded.venues.0.name}}</p>
+                    <p class="card-text">{{dates.start.localDate}} || {{dates.start.localTime}} h.</p>
+                    <p>{{_embedded.venues.0.name}} – {{_embedded.venues.0.city.name}}</p>
                     <a href="/events/details/{{_id}}" class="btn btn-dark d-block event-details-btn">See more</a>
                 </div>
             </div>
         </div>
         {{/each}}
     </div>
-
 
 </div>
 

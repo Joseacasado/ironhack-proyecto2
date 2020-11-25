@@ -23,15 +23,16 @@ router.get('/details/:id', (req, res, next) => {
 router.get('/create', (req, res) => res.render('events/create', { isLogged: req.isAuthenticated() }))
 
 router.post('/create', (req, res, next) => {
-  const { name, date, venue, price, currency, url, latitude, longitude, info } = req.body
+  const { name, genre, date, time, city, venue, price, currency, url, latitude, longitude, info } = req.body
   Event
     .create(
       {
         name, url, info,
-        'classifications.0.genre.name': 'n/a',
-        '_embedded.venues.0.city.name': 'n/a',
+        'classifications.0.genre.name': genre,
+        '_embedded.venues.0.city.name': city,
         'images.0.ratio': '16_9',
         'dates.start.localDate': date,
+        'dates.start.localTime': time,
         '_embedded.venues.0.name': venue,
         'priceRanges.0.max': price,
         'priceRanges.0.min': price,
@@ -54,15 +55,20 @@ router.get('/:id/edit', (req, res) => {
 })
 
 router.post('/:id/edit', (req, res, next) => {
-  const { name, date, venue, price, currency, url, latitude, longitude, info } = req.body
+  const { name, genre, date, time, city, venue, price, currency, url, latitude, longitude, info } = req.body
   const eventId = req.params.id
   Event
     .findByIdAndUpdate(eventId,
       {
         name, url, info,
+        'classifications.0.genre.name': genre,
+        '_embedded.venues.0.city.name': city,
+        'images.0.ratio': '16_9',
         'dates.start.localDate': date,
+        'dates.start.localTime': time,
         '_embedded.venues.0.name': venue,
         'priceRanges.0.max': price,
+        'priceRanges.0.min': price,
         'priceRanges.0.currency': currency,
         '_embedded.venues.0.location.latitude': latitude,
         '_embedded.venues.0.location.longitude': longitude

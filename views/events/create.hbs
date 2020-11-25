@@ -6,16 +6,33 @@
 
       <hr>
       
-      <form action='/events/create' method='POST'>
-        <div class='form-group'>
-          <label for='name'>Name</label>
-          <input type='text' class='form-control' id='name' name="name" placeholder="Event name" required>
+      <form action="/events/create" method="POST">
+        <div class="form-row">
+          <div class="col-md-6 mb-3">
+            <label for="name">Name</label>
+            <input type="text" class="form-control" id="name" name="name" placeholder="Event name" required>
+          </div>
+          <div class="col-md-6 mb-3">
+            <label for="genre">Genre</label>
+            <input type="text" class="form-control" id="genre" name="genre" placeholder="Jazz">
+          </div>
         </div>
 
         <div class="form-row">
           <div class="col-md-6 mb-3">
             <label for="date">Date</label>
-            <input type="date" class="form-control" id="date" name="date">
+            <input type="date" class="form-control" id="date" name="date" required>
+          </div>
+          <div class="col-md-6 mb-3">
+            <label for="time">Time</label>
+            <input type="time" class="form-control" id="time" name="time" placeholder="20:00">
+          </div>
+        </div>
+        
+        <div class="form-row">
+          <div class="col-md-6 mb-3">
+            <label for="city">City</label>
+            <input type="text" class="form-control" id="city" name="city" placeholder="Madrid">
           </div>
           <div class="col-md-6 mb-3">
             <label for="venue">Venue</label>
@@ -34,9 +51,9 @@
           </div>
         </div>
 
-        <div class='form-group'>
-          <label for='url'>Tickets Url</label>
-          <input type='text' class='form-control' id='url' name="url" placeholder="Tickets sales link">
+        <div class="form-group">
+          <label for="url">Tickets Url</label>
+          <input type="text" class="form-control" id="url" name="url" placeholder="Tickets sales link">
         </div>
 
         <div class="form-row">
@@ -56,11 +73,11 @@
         </div>
 
         <div class="form-group">
-          <button type='submit' class='btn btn-dark d-block'>Create Event</button>
+          <button type="submit" class="btn btn-dark d-block">Create Event</button>
         </div>
 
         {{#if errorMsg}}
-        {{errorMsg}}
+          {{errorMsg}}
         {{/if}}
       </form>
     </div>

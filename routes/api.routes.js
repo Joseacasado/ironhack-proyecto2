@@ -17,5 +17,16 @@ router.get('/', (req, res, next) => {
         .catch(err => next(err))
 })
 
+//  getEventDetails
+router.get('/:id', (req, res, next) => {
+    Event
+        .findById(req.params.id)
+        .then(event => {
+            console.log('Este mensaje viene desde api routes', event)
+            res.json(event)
+        })
+        .catch(err => new Error(next(err)))
+})
+
 
 module.exports = router

@@ -2,14 +2,14 @@ const eventsListApiHandler = new EventsApiHandler()
 let resultHtml = '';
 
 
-// //    ****  LISTENERS ****
+// //    ****   LISTENERS    ****
 document.querySelector('#event-search').onsubmit = e => {
     e.preventDefault()
     applyFilters()
 }
 
 
-//    ****  FUNCTIONS ****
+//    ****  FUNCTIONS   ****
 function applyFilters() {
 
     const inputs = document.querySelectorAll('#event-search .form-control')
@@ -27,8 +27,7 @@ function applyFilters() {
     eventsListApiHandler
         .getEventsList(queryString)
         .then(response => {
-            console.log(response)
-            if (response.data.length===0) {          // TO-DO ==> boostrap popups?
+            if (response.data.length === 0) {          // TO-DO ==> boostrap popups?
                 alert('No events for this search')
                 return
             }
@@ -44,7 +43,7 @@ function newFilteredHtml(response) {
     resultHtml = ''
     response.data.forEach(elm => {
         resultHtml += `<div class="col-md-6 col-lg-4">
-                    <div class="card mb-2" style="width: 18rem;">
+                    <div class="card mt-3">
                       <img src="${elm.images[0].url}" class="card-img-top" alt="${elm.name}">
                       <div class="card-body">
                         <h5 class="card-title">${elm.name}</h5>
