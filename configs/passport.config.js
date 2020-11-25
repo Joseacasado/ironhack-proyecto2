@@ -10,7 +10,7 @@ const User = require('./../models/user.model')
 module.exports = app => {
 
   app.use(session({
-    secret: "webmad1020",
+    secret: "webmad1020",   //  ** .env?
     resave: true,
     saveUninitialized: true
   }))

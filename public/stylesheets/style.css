@@ -20,12 +20,13 @@ img {
 .navbar {
   padding: 1rem 2rem; }
 
-.card-body {
-  color: black; }
-
-.card-list img {
-  height: 100px;
-  object-fit: cover; }
+.card {
+  height: 450px;
+  color: #000000;
+  background-color: rgba(255, 255, 200, 0.5); }
+  .card img {
+    height: 200px;
+    object-fit: cover; }
 
 #eventMap {
   height: 400px;
@@ -40,5 +41,23 @@ img {
   /* Chrome 10-25, Safari 5.1-6 */
   background: linear-gradient(to right, #434343, #000000);
   /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */ }
+
+.successMsg {
+  text-align: center;
+  border: 3px solid #36c82f;
+  border-radius: 5px; }
+  .successMsg span {
+    padding: .5rem;
+    background-color: rgba(54, 200, 47, 0.5); }
+    .successMsg span h5 {
+      color: #36c82f; }
+
+.modal {
+  text-align: center;
+  border: 3px solid #c82f2f;
+  border-radius: 5px; }
+  .modal .modal-content {
+    padding: .5rem;
+    background-color: rgba(200, 47, 47, 0.5); }
 
 /*# sourceMappingURL=style.css.map */

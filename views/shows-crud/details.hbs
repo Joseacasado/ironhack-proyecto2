@@ -24,8 +24,37 @@
             <a class="btn btn-warning btn-lg" href="{{url}}" target="_blank">Buy tickets</a>
             {{/with}}
             {{#if isLogged}}
+            
             <a class="btn btn-info btn-lg" href="/shows-crud/{{event.id}}/edit">Edit event</a>
-            <a class="btn btn-danger btn-lg" href="/shows-crud/{{event.id}}/delete">Delete event</a>
+
+            <!-- Button trigger modal -->
+            <button type="button" class="btn btn-danger btn-lg" data-toggle="modal" data-target="#staticBackdrop">
+              Delete event
+            </button>
+
+            <!-- Modal -->
+            <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Delete event</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <p>This action is irreversible, are you sure?</p>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-dark" data-dismiss="modal">Close</button>
+                    <form action="/shows-crud/{{event.id}}/delete" method="POST">
+                      <button class="btn btn-danger" type="submit">Confirm</button>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+
             {{/if}}
           
           </div>

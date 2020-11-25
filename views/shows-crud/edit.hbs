@@ -5,7 +5,7 @@
 
       <hr>
       {{#with event}}
-      <form action='/shows-crud/create' method='POST'>
+      <form action='/shows-crud//{{id}}/edit' method='POST' enctype="multipart/form-data">
         <div class='form-group'>
           <label for='name'>Name</label>
           <input type='text' class='form-control' id='name' name="name" value="{{name}}" required>

@@ -66,12 +66,12 @@ router.post('/:id/edit', CDNupload.single('eventImageFile'), (req, res, next) =>
         '_embedded.venues.0.location.longitude': longitude,
         // 'images.0.url': imageUrl 
       })
-    .then(() => res.redirect('back'))
+    .then(() => res.redirect(`/shows-crud/details/${eventId}`))
     .catch(err => new Error(next(err)))
 })
 
 
-router.get('/:id/delete', (req, res, next) => {
+router.post('/:id/delete', (req, res, next) => {
     Event
       .findByIdAndDelete(req.params.id)
       .then(() => res.redirect('/shows-crud'))
