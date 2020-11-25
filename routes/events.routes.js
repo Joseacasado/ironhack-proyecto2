@@ -8,7 +8,7 @@ const CDNupload = require('./../configs/cdn-upload.config')
 router.get('/', (req, res, next) => {
   const successMsg = req.query.successMsg
   Event
-    .aggregate([ {$sample: { size: 40 }} ])
+    .aggregate([{ $sample: { size: 40 } }])
     .then(events => res.render('events/', { successMsg, events, isLogged: req.isAuthenticated() }))
     .catch(err => new Error(next(err)))
 })
@@ -85,10 +85,10 @@ router.post('/edit/picture', CDNupload.single('eventImageFile'), (req, res, next
 
 
 router.post('/:id/delete', (req, res, next) => {
-    Event
-      .findByIdAndDelete(req.params.id)
-      .then(() => res.redirect('/events'))
-      .catch(err => new Error(next(err)))
+  Event
+    .findByIdAndDelete(req.params.id)
+    .then(() => res.redirect('/events'))
+    .catch(err => new Error(next(err)))
 })
 
 

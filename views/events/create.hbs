@@ -26,7 +26,7 @@
         <div class="form-row">
           <div class="col-md-6 mb-3">
             <label for="price">Price</label>
-            <input type="text" class="form-control" id="price" name="price" placeholder="20">
+            <input type="number" min="0" required class="form-control" id="price" name="price" placeholder="20">
           </div>
           <div class="col-md-6 mb-3">
             <label for="currency">Currency</label>
@@ -60,7 +60,7 @@
         </div>
 
         {{#if errorMsg}}
-          {{errorMsg}}
+        {{errorMsg}}
         {{/if}}
       </form>
     </div>

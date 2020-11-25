@@ -2,19 +2,17 @@ const monoogose = require('mongoose')
 const Schema = monoogose.Schema
 
 
-const eventSchema = new Schema({ 
+const eventSchema = new Schema({
 
   name: String,
   type: String,
-  test: Boolean,
   url: String,
   locale: String,
   images: [
     {
       ratio: String,
       url: {
-        type: String,
-        default: 'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?ixlib=rb-1.2.1&auto=format&fit=crop&w=2534&q=80'
+        type: String, default: 'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?ixlib=rb-1.2.1&auto=format&fit=crop&w=2534&q=80'
       },
       width: Number,
       height: Number,
