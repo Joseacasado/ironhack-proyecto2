@@ -4,15 +4,16 @@
       <h1>Create new event</h1>
 
       <hr>
-      
-      <form action='/events/create' method='POST' enctype="multipart/form-data">
+      {{!-- enctype="multipart/form-data"
+      <div class="custom-file">
+        <label class="custom-file-label" for="eventImageFile">Select image</label>
+        <input name="eventImageFile" type="file" class="custom-file-input" id="eventImageFile">
+      </div> --}}
+
+      <form action='/events/create' method='POST'>
         <div class='form-group'>
           <label for='name'>Name</label>
           <input type='text' class='form-control' id='name' name="name" placeholder="Event name" required>
-        </div>
-        <div class="custom-file">
-            <label class="custom-file-label" for="eventImageFile">Select image</label>
-            <input name="eventImageFile" type="file" class="custom-file-input" id="eventImageFile">
         </div>
 
         <div class="form-row">
@@ -29,7 +30,7 @@
         <div class="form-row">
           <div class="col-md-6 mb-3">
             <label for="price">Price</label>
-            <input type="number" class="form-control" id="price" name="price" min="0" placeholder="20">
+            <input type="text" class="form-control" id="price" name="price" min="0" placeholder="20">
           </div>
           <div class="col-md-6 mb-3">
             <label for="currency">Currency</label>
@@ -63,7 +64,7 @@
         </div>
 
         {{#if errorMsg}}
-          {{errorMsg}}
+        {{errorMsg}}
         {{/if}}
       </form>
     </div>

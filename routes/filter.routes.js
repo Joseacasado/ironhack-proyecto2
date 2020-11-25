@@ -6,6 +6,9 @@ const Event = require('../models/event.model')
 
 // Endpoints
 router.get('/', (req, res) => {
+
+Event.find({})
+
     Event
         .aggregate([{ $sample: { size: 45 } }])
         .then(events => res.render('filter/filter-form', { events, isLogged: req.isAuthenticated() }))

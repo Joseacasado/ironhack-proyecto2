@@ -44,7 +44,7 @@ function newFilteredHtml(response) {
     response.data.forEach(elm => {
         resultHtml += `<div class="col-md-6 col-lg-4">
                     <div class="card mb-2" style="width: 18rem;">
-                      <img src="${elm.images[2].url}" class="card-img-top" alt="${elm.name}">
+                      <img src="${elm.images[0].url}" class="card-img-top" alt="${elm.name}">
                       <div class="card-body">
                         <h5 class="card-title">${elm.name}</h5>
                         <p class="card-text">${elm.dates.start.localDate} || ${elm._embedded.venues[0].name}</p>
