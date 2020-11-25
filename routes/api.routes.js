@@ -15,7 +15,6 @@ router.get('/', (req, res, next) => {
         .find({ name: regex.name, "classifications.genre.name": regex.genre, "_embedded.venues.city.name": regex.city, "priceRanges.max": { $lte: priceMax }, "priceRanges.min": { $gte: priceMin } })
         .then(event => res.json(event))
         .catch(err => next(err))
-
 })
 
 

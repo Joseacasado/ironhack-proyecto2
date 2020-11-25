@@ -1,5 +1,5 @@
 let mapInstance
-const id = document.querySelector('#eventIdFinal').value
+const id = document.querySelector('#eventId').value
 
 function initApp() {
   drawMap()

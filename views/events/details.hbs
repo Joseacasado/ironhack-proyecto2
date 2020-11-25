@@ -5,7 +5,7 @@
 
           <div class="col-md-4 event-details-img">
             {{#with event}}
-            <figure><img src="{{images.2.url}}" alt="{{name}}"></figure>
+            <figure><img src="{{images.0.url}}" alt="{{name}}"></figure>
             <figcaption></figcaption>
           </div>
 
@@ -21,17 +21,20 @@
             <hr>
             <p><strong>Description:</strong> {{info}}</p>
             <hr>
-            <a class="btn btn-warning btn-lg" href="{{url}}" target="_blank">Buy tickets</a>
-            {{/with}}
-            {{#if isLogged}}
-            
-            <a class="btn btn-info btn-lg" href="/events/{{event.id}}/edit">Edit event</a>
-            <a class="btn btn-dark btn-lg" href="#" target="_blank">Attend</a>
+            <div class="edit-buttons">
 
-            <!-- Button trigger modal -->
-            <button type="button" class="btn btn-danger btn-lg" data-toggle="modal" data-target="#staticBackdrop">
-              Delete event
-            </button>
+              <a class="btn btn-outline-light btn-lg" href="{{url}}" target="_blank">Buy tickets</a>
+              {{/with}}
+              
+              {{#if isLogged}}
+              <a class="btn btn-outline-success btn-lg" href="#" target="_blank">Attend</a>
+              <a class="btn btn-outline-info btn-lg" href="/events/{{event.id}}/edit">Edit event</a>
+
+              <!-- Button trigger modal -->
+              <button type="button" class="btn btn-outline-danger btn-lg" data-toggle="modal" data-target="#staticBackdrop">
+                Delete event
+              </button>
+            </div>
 
             <!-- Modal -->
             <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -62,6 +65,7 @@
         </div>
   </div>
 
+  <span class="d-none" id="eventId-map">{{event.id}}</span>
   <div id="eventMap"></div>
 
 </div>
@@ -71,4 +75,5 @@
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
 <script src="/javascripts/events-api/event-map.js"></script>
+<script src="/javascripts/events-api/api-handler.js"></script>
 <script src="https://maps.googleapis.com/maps/api/js?key={{mapsKey}}&callback=initApp"></script>

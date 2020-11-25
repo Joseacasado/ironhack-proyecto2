@@ -16,6 +16,11 @@ img {
   width: 100%;
 }
 
+ul {
+  list-style: none;
+  padding: 0;
+}
+
 .navbar {
   padding: 1rem 2rem;
 }
@@ -56,16 +61,54 @@ img {
   }
 }
 
+.errorMsg {
+  font-size: 1rem;
+  font-weight: 400;
+  color: white; 
+  text-align: center; 
+  margin-top: 10px;
+  padding: .5rem 1rem;
+  background: rgb(255, 0, 0);
+  border: 2px solid rgb(200, 0, 0);
+  border-radius: 3px; 
+}
+
 .modal {
   text-align: center;
   border: 3px solid rgb(200, 47, 47);
   border-radius: 5px;
   .modal-content {
     padding: .5rem;
-    background-color: rgba(200, 47, 47, 0.5);
+    background-color: rgba(200, 47, 47, 0.7);
+    h5 {
+      text-transform: uppercase;
+      font-weight: 700;
+    }
   }
 }
 
 .hide {
   display: none;
+}
+
+.custom-forms {
+  padding: 2rem;
+  background-color: rgba(255, 255, 200, .1);
+  border-radius: 5px;
+}
+
+.user-profile {
+
+  .user-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    img {
+      width: 100px; 
+      height: 100px;
+      border-radius: 50%;
+      background-color: aliceblue;
+      object-fit: cover;
+    }
+  }
 }
