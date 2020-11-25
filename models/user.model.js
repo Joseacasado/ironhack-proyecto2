@@ -9,7 +9,7 @@ const userSchema = new Schema({
   email: String,
   avatar: { type: String, default: 'https://www.cmcaindia.org/wp-content/uploads/2015/11/default-profile-picture-gmail-2.png' },
   isAdmin: { type: Boolean, default: false },
-  events_id: [{ type: Schema.Types.ObjectId, ref: 'Event' }],
+  events_id: [{ type: Schema.Types.ObjectId, ref: 'Event' }]
 }, { timestamps: true })
 
 const User = mongoose.model("User", userSchema)

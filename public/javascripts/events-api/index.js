@@ -27,6 +27,7 @@ function applyFilters() {
     eventsListApiHandler
         .getEventsList(queryString)
         .then(response => {
+            console.log(response)
             if (response.data.length===0) {          // TO-DO ==> boostrap popups?
                 alert('No events for this search')
                 return

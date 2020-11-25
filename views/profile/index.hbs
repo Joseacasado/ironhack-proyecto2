@@ -1,14 +1,32 @@
 <div class="container">
+    <div class="row justify-content-center my-3 user-profile">
 
-    <figure>
-        <img style="width: 100px; background-color: aliceblue;" src="{{user.avatar}}" alt="{{user.name}} ">
-    </figure>
-    <h3>Hola {{user.fullname}}</h3>
-    <h4>a.k.a {{user.username}}</h4>
-    <p>This is your email {{user.email}}</p>
+        <div class="col-md-6 custom-forms user-info">
 
-    <a href="/profile/edit" class="btn btn-dark" style="margin-right: 20px;">Edit</a>
-    <a href="/logout" class="btn btn-dark" style="margin-right: 20px;">Log out</a>
-    <a href="/profile/send-mail" class="btn btn-dark">Attend</a>
+            <figure>
+                <img src="{{user.avatar}}" alt="{{user.name}} ">
+            </figure>
+            <h3>{{user.fullname}}</h3>
+            <h4>username: <strong>{{user.username}}</strong></h4>
+            <p>Email address: <strong>{{user.email}}</strong></p>
+
+            <div class="btn-group" role="group" aria-label="Basic example">
+                <a href="/profile/edit" class="btn btn-dark btn-lg">Edit</a>
+                <a href="/logout" class="btn btn-dark btn-lg">Log out</a>
+                <a href="/profile/send-mail" class="btn btn-dark btn-lg">Attend</a>
+            </div>
+            
+        </div>
+
+        <div class="col-md-6 custom-forms"> 
+            <ul id="fav-list">
+                <li>AQUÍ IRÁN LOS FAVS</li>
+                {{!-- {{#each events.attend}}
+                <li>{{this}}</li>
+                {{/each}} --}}
+            </ul>
+        </div>
+    </div>
+
 </div>
 

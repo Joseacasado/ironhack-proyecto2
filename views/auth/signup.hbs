@@ -1,27 +1,28 @@
 <div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-6">
+    <div class="row justify-content-center text-center mt-5">
+        <div class="col-md-8 custom-forms">
 
             <h1>Sign up</h1>
 
+            <hr>
+
             <form action="/signup" method="POST">
-                <div class='form-group'>
+                <div class='form-group text-left'>
                     <label for='username'>Username</label>
                     <input name='username' type='text' class='form-control' placeholder='username' id='username'>
                 </div>
-                <div class='form-group'>
+                <div class='form-group text-left'>
                     <label for='password'>Password</label>
                     <input name='password' type='password' class='form-control' placeholder='******' id='password'>
                 </div>
-                <div class='form-group'>
+                <div class='form-group text-left'>
                     <label for='email'>Email</label>
                     <input name='email' type='email' class='form-control' placeholder='user@mail.end' id='email'>
                 </div>
                 <button type='submit' class='btn btn-dark btn-block'>Sign me up!</button>
                 {{#if errorMsg}}
                 {{#each errorMsg}}
-                <p style="margin-top: 10px;background: red; color: white; text-align: center; padding: 10px">
-                    {{msg}}</p>
+                    <p class="errorMsg">{{msg}}</p>
                 {{/each}}
                 {{/if}}
             </form>

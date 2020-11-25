@@ -1,15 +1,11 @@
 <div class="container">
-  <div class="row justify-content-center">
-    <div class="col-md-8">
+  <div class="row justify-content-center my-3">
+    <div class="col-md-8 custom-forms">
+      
       <h1>Create new event</h1>
 
       <hr>
-      {{!-- enctype="multipart/form-data"
-      <div class="custom-file">
-        <label class="custom-file-label" for="eventImageFile">Select image</label>
-        <input name="eventImageFile" type="file" class="custom-file-input" id="eventImageFile">
-      </div> --}}
-
+      
       <form action='/events/create' method='POST'>
         <div class='form-group'>
           <label for='name'>Name</label>
@@ -30,7 +26,7 @@
         <div class="form-row">
           <div class="col-md-6 mb-3">
             <label for="price">Price</label>
-            <input type="text" class="form-control" id="price" name="price" min="0" placeholder="20">
+            <input type="number" min="0" required class="form-control" id="price" name="price" placeholder="20">
           </div>
           <div class="col-md-6 mb-3">
             <label for="currency">Currency</label>
@@ -56,7 +52,7 @@
 
         <div class="form-group">
           <label for="info">Description</label>
-          <textarea name="info" id="info" cols="100" rows="4"></textarea>
+          <textarea name="info" id="info" cols="95" rows="4"></textarea>
         </div>
 
         <div class="form-group">

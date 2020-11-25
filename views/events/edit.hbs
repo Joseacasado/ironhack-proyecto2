@@ -1,18 +1,32 @@
 <div class="container">
-  <div class="row justify-content-center">
-    <div class="col-md-8">
-      <h1>Edit event</h1>
+  <div class="row justify-content-center my-3">
+    <div class="col-md-8 custom-forms">
+
+      <header>
+        <div class="row justify-content-between align-items-center">
+          <div class="col-md-6">
+            <h1>Edit event</h1>
+          </div>
+          {{#with event}}
+          <div class="col-md-4">
+            <button class="btn btn-outline-warning event-pic-btn">Upload Event Picture</button>
+            <form method="POST" action="/events/edit/picture?id={{id}}" class="pic-form hide" enctype="multipart/form-data">
+                <div class="custom-file">
+                    <input name="eventImageFile" type="file" class="custom-file-input" id="eventImageFile">
+                    <label class="custom-file-label" for="imageFile">Select image</label>
+                </div>
+                <button type="submit" class="btn btn-success btn-sm">Save</button>
+                <button type="button" class="btn btn-danger btn-sm cancel-btn">Cancel</button>
+            </form>
+          </div>
+        </div>
+      </header>
 
       <hr>
-      {{#with event}}
       <form action='/events/{{id}}/edit' method='POST'>
         <div class='form-group'>
           <label for='name'>Name</label>
           <input type='text' class='form-control' id='name' name="name" value="{{name}}" required >
-        </div>
-        <div class="custom-file">
-            <label class="custom-file-label" for="eventImageFile">Select image</label>
-            <input name="eventImageFile" type="file" class="custom-file-input" id="eventImageFile">
         </div>
 
         <div class="form-row">
@@ -32,7 +46,7 @@
           {{#with priceRanges.[0]}}
           <div class="col-md-6 mb-3">
             <label for="price">Price</label>
-            <input type="number" class="form-control" id="price" name="price" min="0" value="{{max}}">
+            <input type="text" class="form-control" id="price" name="price" value="{{max}}">
           </div>
           <div class="col-md-6 mb-3">
             <label for="currency">Currency</label>
@@ -61,7 +75,7 @@
 
         <div class="form-group">
           <label for="info">Description</label>
-          <textarea name="info" id="info" cols="100" rows="4">{{info}}</textarea>
+          <textarea name="info" id="info" cols="95" rows="4">{{info}}</textarea>
         </div>
 
         <div class="form-group">
@@ -76,3 +90,7 @@
     </div>
   </div>
 </div>
+
+
+
+<script src="/javascripts/files-upload/event-pic-dom.js"></script>
