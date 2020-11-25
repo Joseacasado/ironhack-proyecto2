@@ -6,9 +6,10 @@ const CDNupload = require('./../configs/cdn-upload.config')
 
 // Endpoints
 router.get('/', (req, res, next) => {
+  const successMsg = req.query.successMsg
   Event
     .aggregate([ {$sample: { size: 40 }} ])
-    .then(events => res.render('shows-crud/', { events, isLogged: req.isAuthenticated() }))
+    .then(events => res.render('shows-crud/', { successMsg, events, isLogged: req.isAuthenticated() }))
     .catch(err => new Error(next(err)))
 })
 
@@ -38,7 +39,7 @@ router.post('/create', CDNupload.single('eventImageFile'), (req, res, next) => {
       })
     .then(response => {
       console.log(response)
-      res.redirect('/shows-crud', { succesMsg: 'Event created!'})
+      res.redirect(`/shows-crud?successMsg='Event created!'`)
     })
     .catch(err => new Error(next(err)))
 })

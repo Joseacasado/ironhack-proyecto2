@@ -48,7 +48,7 @@ function newFilteredHtml(response) {
                       <div class="card-body">
                         <h5 class="card-title">${elm.name}</h5>
                         <p class="card-text">${elm.dates.start.localDate} || ${elm._embedded.venues[0].name}</p>
-                        <a href="/filter/details?id=${elm._id}" class="btn btn-dark d-block event-details-btn">See more</a> 
+                        <a href="/events/details/${elm._id}" class="btn btn-dark d-block event-details-btn">See more</a> 
                       </div>
                     </div>
                   </div>`
