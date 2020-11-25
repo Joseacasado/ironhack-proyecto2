@@ -1,8 +1,8 @@
-const { query } = require('express')
+
 const express = require('express')
 const router = express.Router()
 const Event = require('../models/event.model')
-const { route } = require('./base.routes')
+
 
 // Endpoints
 router.get('/', (req, res) => {
