@@ -10,13 +10,34 @@ router.get('/profile', (req, res) => res.render('profile/index', { user: req.use
 
 router.get('/profile/edit', (req, res, next) => res.render('profile/edit', { user: req.user, isLogged: req.isAuthenticated() }))
 
-router.post('/profile/edit', CDNupload.single('imageFile'), (req, res, next) => {
+router.post('/profile/edit', (req, res, next) => {
+<<<<<<< HEAD
 
     const { fullname, user, email } = req.body
-    const avatar = req.file.path
+    let avatar
+    if (req.file) {
+        CDNupload.single('imageFile')
+        avatar = req.file.path
+    } else { avatar = req.body.avatar }
+
+=======
+
+    const { fullname, username, email } = req.body
+
+>>>>>>> carlos
     User
-        .findByIdAndUpdate(req.user.id, { avatar, fullname, user, email })
+        .findByIdAndUpdate(req.user.id, { username, fullname, email })
         .then(() => res.redirect('/profile'))
+        .catch(err => next(err))
+})
+
+router.post('/profile/edit/picture', CDNupload.single('imageFile'), (req, res, next) => {
+
+    const avatar = req.file.path
+
+    User
+        .findByIdAndUpdate(req.user.id, { avatar })
+        .then(() => res.redirect('/profile/edit'))
         .catch(err => next(err))
 })
 

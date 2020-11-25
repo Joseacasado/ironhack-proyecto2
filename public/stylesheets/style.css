@@ -42,6 +42,7 @@ img {
   background: linear-gradient(to right, #434343, #000000);
   /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */ }
 
+<<<<<<< HEAD
 .successMsg {
   text-align: center;
   border: 3px solid #36c82f;
@@ -59,5 +60,9 @@ img {
   .modal .modal-content {
     padding: .5rem;
     background-color: rgba(200, 47, 47, 0.5); }
+=======
+.hide {
+  display: none; }
+>>>>>>> ccbf072f8880c307530a78c8e12f143c099528f2
 
 /*# sourceMappingURL=style.css.map */

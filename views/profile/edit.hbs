@@ -6,6 +6,7 @@
 
             <h1>Edit Profile</h1>
 
+<<<<<<< HEAD
             <form method="POST" action="/profile/edit" enctype="multipart/form-data">
                 <div class='form-group'>
                     <figure>
@@ -16,7 +17,24 @@
                         <input name="imageFile" type="file" class="custom-file-input" id="imageFile">
                         <label class="custom-file-label" for="imageFile">Select image</label>
                     </div>
+=======
+            <button class="btn btn-warning" id="profile-pic-btn">Upload Profile Picture</button>
+
+            <form method="POST" action="/profile/edit/picture" class="pic-form hide" enctype="multipart/form-data">
+                <div class="custom-file">
+                    <input name="imageFile" type="file" class="custom-file-input" id="imageFile">
+                    <label class="custom-file-label" for="imageFile">Select image</label>
+>>>>>>> carlos
                 </div>
+                <button type="submit" class="btn btn-dark btn-sm">Save</button>
+                <button type="button" class="btn btn-danger btn-sm">Cancel</button>
+            </form>
+
+            <form method="POST" action="/profile/edit">
+                <figure>
+                    <img src="{{user.avatar}}" style="width: 200px; background-color: aliceblue;"
+                        alt="{{user.username}}">
+                </figure>
                 <div class="form-group">
                     <label>Fullname</label>
                     <input type="text" class="form-control" name="fullname" value="{{user.fullname}}">
@@ -33,9 +51,5 @@
             </form>
         </div>
     </div>
-    <script></script>
-    
-
-
-
 </div>
+<script src="/javascripts/profile-pic-dom.js"></script>
