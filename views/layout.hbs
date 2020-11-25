@@ -22,13 +22,6 @@
       </span>
     </div>
     {{/if}}
-    {{#if errorMsg}}
-    <div class="errorMsg">
-      <span class="navbar-text">
-        {{errorMsg}}
-      </span>
-    </div>
-    {{/if}}
 
     <button class='navbar-toggler' type='button' data-toggle='collapse' data-target='#navbarNavAltMarkup'
       aria-controls='navbarNavAltMarkup' aria-expanded='false' aria-label='Toggle navigation'>
@@ -37,11 +30,11 @@
     <div class='collapse navbar-collapse' id='navbarNavAltMarkup'>
       <ul class='navbar-nav ml-auto'>
         <li class='nav-item'>
-          <a class='nav-link' href='/filter'>Events</a>
+          <a class='nav-link' href='/events'>Events</a>
         </li>
         {{#if isLogged}}
         <li class='nav-item'>
-          <a class='nav-link' href='/shows-crud/create'>Create event</a>
+          <a class='nav-link' href='/events/create'>Create event</a>
         </li>
         {{/if}}
         {{#unless isLogged}}
