@@ -11,20 +11,9 @@ router.get('/profile', (req, res) => res.render('profile/index', { user: req.use
 router.get('/profile/edit', (req, res, next) => res.render('profile/edit', { user: req.user, isLogged: req.isAuthenticated() }))
 
 router.post('/profile/edit', (req, res, next) => {
-<<<<<<< HEAD
-
-    const { fullname, user, email } = req.body
-    let avatar
-    if (req.file) {
-        CDNupload.single('imageFile')
-        avatar = req.file.path
-    } else { avatar = req.body.avatar }
-
-=======
 
     const { fullname, username, email } = req.body
 
->>>>>>> carlos
     User
         .findByIdAndUpdate(req.user.id, { username, fullname, email })
         .then(() => res.redirect('/profile'))
