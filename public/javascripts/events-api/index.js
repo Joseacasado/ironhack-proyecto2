@@ -1,5 +1,5 @@
 const eventsListApiHandler = new EventsApiHandler()
-let resultHtml = '';
+let resultHtml = ''
 
 
 // //    ****  LISTENERS ****

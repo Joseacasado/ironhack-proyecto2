@@ -9,7 +9,9 @@
           </div>
 
           <div class="col-md-8">
-            <h2>{{name}}</h2>
+            <h2>{{name}} <button class="btn btn-sm btn-outline-primary fav" value="{{_id}}">♥</button></h2>
+            
+            {{!-- <button class="btn btn-sm btn-primary" value="{{_id}}"><i class="fa fa-thumbs-up">Like</i> </button> --}}
             <hr>
             <ul>
               <li>Date: {{dates.start.localDate}}</li>
@@ -26,7 +28,6 @@
               {{/with}}
               
               {{#if isLogged}}
-              <a class="btn btn-outline-success btn-lg" href="#" target="_blank">Attend</a>
               <a class="btn btn-outline-info btn-lg" href="/events/{{event.id}}/edit">Edit event</a>
 
               <!-- Button trigger modal -->
@@ -34,8 +35,6 @@
                 Delete event
               </button>
             </div>
-
-
 
         <!-- Modal -->
         <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1"
@@ -72,10 +71,8 @@
 
 </div>
 
-
-
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-
 <script src="/javascripts/events-api/event-map.js"></script>
 <script src="/javascripts/events-api/api-handler.js"></script>
 <script src="https://maps.googleapis.com/maps/api/js?key={{mapsKey}}&callback=initApp"></script>
+<script src="/javascripts/events-api/fav-btn.js"></script>
