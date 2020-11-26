@@ -10,14 +10,14 @@ router.get('/', (req, res, next) => {
   Event
     .aggregate([{ $sample: { size: 40 } }])
     .then(events => res.render('events/', { successMsg, events, isLogged: req.isAuthenticated() }))
-    .catch(err => new Error(next(err)))
+    .catch(err => next(new Error(err)))
 })
 
 router.get('/details/:id', (req, res, next) => {
   Event
     .findById(req.params.id)
     .then(event => res.render('events/details', { event, isLogged: req.isAuthenticated() }))
-    .catch(err => new Error(next(err)))
+    .catch(err => next(new Error(err)))
 })
 
 router.get('/create', (req, res) => res.render('events/create', { isLogged: req.isAuthenticated() }))
@@ -40,18 +40,15 @@ router.post('/create', (req, res, next) => {
         '_embedded.venues.0.location.latitude': latitude,
         '_embedded.venues.0.location.longitude': longitude
       })
-    .then(response => {
-      console.log(response)
-      res.redirect(`/events?successMsg=Event created!`)
-    })
-    .catch(err => new Error(next(err)))
+    .then(() => res.redirect(`/events?successMsg=Event created!`))
+    .catch(err => next(new Error(err)))
 })
 
 router.get('/:id/edit', (req, res) => {
   Event
     .findById(req.params.id)
     .then(event => res.render('events/edit', { event, isLogged: req.isAuthenticated() }))
-    .catch(err => new Error(next(err)))
+    .catch(err => next(new Error(err)))
 })
 
 router.post('/:id/edit', (req, res, next) => {
@@ -73,11 +70,8 @@ router.post('/:id/edit', (req, res, next) => {
         '_embedded.venues.0.location.latitude': latitude,
         '_embedded.venues.0.location.longitude': longitude
       })
-    .then(response => {
-      console.log(response)
-      res.redirect(`/events/details/${ eventId }`)
-    })
-    .catch(err => new Error(next(err)))
+    .then(() => res.redirect(`/events/details/${ eventId }`))
+    .catch(err => next(new Error(err)))
 })
 
 router.post('/edit/picture', CDNupload.single('eventImageFile'), (req, res, next) => {
@@ -86,7 +80,7 @@ router.post('/edit/picture', CDNupload.single('eventImageFile'), (req, res, next
     Event
         .findByIdAndUpdate(eventId, { 'images.0.url': imageUrl })
         .then(() => res.redirect(`/events/details/${ eventId }`))
-        .catch(err => new Error(next(err)))
+        .catch(err => next(new Error(err)))
 })
 
 
@@ -94,7 +88,7 @@ router.post('/:id/delete', (req, res, next) => {
   Event
     .findByIdAndDelete(req.params.id)
     .then(() => res.redirect('/events'))
-    .catch(err => new Error(next(err)))
+    .catch(err => next(new Error(err)))
 })
 
 

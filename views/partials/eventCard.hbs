@@ -1,0 +1,11 @@
+<div class="col-md-6 col-lg-4">
+    <div class="card mt-3">
+        <img src="{{images.0.url}}" class="card-img-top" alt="{{elm.name}}">
+        <div class="card-body">
+            <h5 class="card-title">{{name}}</h5>
+            <p class="card-text">{{dates.start.localDate}} || {{dates.start.localTime}} h.</p>
+            <p>{{_embedded.venues.0.name}} – {{_embedded.venues.0.city.name}}</p>
+            <a href="/events/details/{{_id}}" class="btn btn-dark d-block event-details-btn">See more</a>
+        </div>
+    </div>
+</div>

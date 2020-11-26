@@ -8,8 +8,6 @@ window.onload = () => {
     .then(response => {
       let event = response.data._embedded.events[0]
 
-      console.log(event)
-
       document.querySelector('#eventDetailsContainer').innerHTML = 
         `<div class="row justify-content-center align-items-center">
 

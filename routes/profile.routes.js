@@ -17,7 +17,7 @@ router.post('/profile/edit', (req, res, next) => {
     User
         .findByIdAndUpdate(req.user.id, { username, fullname, email })
         .then(() => res.redirect('/profile'))
-        .catch(err => next(err))
+        .catch(err => next(new Error(err)))
 })
 
 router.post('/profile/edit/picture', CDNupload.single('imageFile'), (req, res, next) => {
@@ -27,7 +27,7 @@ router.post('/profile/edit/picture', CDNupload.single('imageFile'), (req, res, n
     User
         .findByIdAndUpdate(req.user.id, { avatar })
         .then(() => res.redirect('/profile/edit'))
-        .catch(err => next(err))
+        .catch(err => next(new Error(err)))
 })
 
 router.get('/profile/send-mail', (req, res, next) => {
@@ -44,7 +44,7 @@ router.get('/profile/send-mail', (req, res, next) => {
             console.log(info)
             res.redirect('/profile')
         })
-        .catch(err => next(err))
+        .catch(err => next(new Error(err)))
 })
 
 

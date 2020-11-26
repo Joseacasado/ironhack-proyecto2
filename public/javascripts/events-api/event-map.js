@@ -14,10 +14,7 @@ function drawMap() {
 function getEventLocation(id) {
   eventDetailsApiHandler
     .getEventDetails(id)
-    .then(response => {
-      console.log('¡Este mensaje viene desde cliente!!', response)
-      drawMarker(response.data)
-    })
+    .then(response => drawMarker(response.data))
     .catch(err => console.log(err))
 }
 

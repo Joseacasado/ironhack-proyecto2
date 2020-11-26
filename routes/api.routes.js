@@ -14,18 +14,15 @@ router.get('/', (req, res, next) => {
     Event
         .find({ name: regex.name, "classifications.genre.name": regex.genre, "_embedded.venues.city.name": regex.city, "priceRanges.max": { $lte: priceMax }, "priceRanges.min": { $gte: priceMin } })
         .then(event => res.json(event))
-        .catch(err => next(err))
+        .catch(err => next(new Error(err)))
 })
 
 //  getEventDetails
 router.get('/:id', (req, res, next) => {
     Event
         .findById(req.params.id)
-        .then(event => {
-            console.log('Este mensaje viene desde api routes', event)
-            res.json(event)
-        })
-        .catch(err => new Error(next(err)))
+        .then(event => res.json(event))
+        .catch(err => next(new Error(err)))
 })
 
 
