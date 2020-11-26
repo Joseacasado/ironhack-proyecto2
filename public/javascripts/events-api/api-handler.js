@@ -7,4 +7,5 @@ class EventsApiHandler {
 
     getEventsList = queryString => this.axiosApp.get(`/api?${queryString}`)
     getEventDetails = id => this.axiosApp.get(`/api/${id}`)
+    addEventToList = id => this.axiosApp.put(`/api/add-event/${id}`)
 }
