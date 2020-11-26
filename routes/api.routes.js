@@ -6,8 +6,8 @@ const Event = require('../models/event.model')
 router.get('/', (req, res, next) => {
     
     const { name, city, genre } = req.query
-    req.query.priceMin ? priceMin = req.query.priceMin : priceMin = 0 // If not price min query $gte is not working
-    req.query.priceMax ? priceMax = req.query.priceMax : priceMax = Number.POSITIVE_INFINITY // If not price max query $lte is not working
+    req.query.priceMin ? priceMin = req.query.priceMin : priceMin = 0
+    req.query.priceMax ? priceMax = req.query.priceMax : priceMax = Number.POSITIVE_INFINITY
 
     const regex = { name: new RegExp(name, 'i'), city: new RegExp(city, 'i'), genre: new RegExp(genre, 'i') } 
 

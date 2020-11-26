@@ -3,6 +3,9 @@ const router = express.Router()
 const Event = require('../models/event.model')
 const CDNupload = require('./../configs/cdn-upload.config')
 
+// const isAdmin = () => (req, res, next) => req.user.isAdmin ? next() : res.render('auth/login', { errorMsg: 'You don\'t have permission to do this action' })
+
+
 
 // Endpoints
 router.get('/', (req, res, next) => {
@@ -24,6 +27,11 @@ router.get('/create', (req, res) => res.render('events/create', { isLogged: req.
 
 router.post('/create', (req, res, next) => {
   const { name, genre, date, time, city, venue, price, currency, url, latitude, longitude, info } = req.body
+
+  name === ' ' ? res.render('events/create', { errorMsg: 'Fill name filed, please'}) : null
+  genre === ' ' ? res.render('events/create', { errorMsg: 'Fill genre filed, please'}) : null
+  venue === ' ' ? res.render('events/create', { errorMsg: 'Fill venue filed, please' }) : null
+  
   Event
     .create(
       {
