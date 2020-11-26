@@ -6,7 +6,13 @@ const transporter = require('../configs/nodemailer.config')
 
 
 // Endpoints
-router.get('/profile', (req, res) => res.render('profile/', { user: req.user, isLogged: req.isAuthenticated() }))
+router.get('/profile', (req, res) => {
+    User
+        .findById(req.user.id)
+        .populate('events_id')
+        .then(user => res.render('profile/', { user, isLogged: req.isAuthenticated() }))
+        .catch(err => next(new Error(err)))
+})
 
 router.get('/profile/edit', (req, res, next) => res.render('profile/edit', { user: req.user, isLogged: req.isAuthenticated() }))
 
