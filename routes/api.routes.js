@@ -8,12 +8,14 @@ router.put('/add-event/:id', (req, res, next) => {
 
     User
         .findByIdAndUpdate(req.user.id, { $push: { events_id: req.params.id } })
+        .then(event => res.json(event))
         .catch(err => next(new Error(err)))
 })
 
 router.delete('/remove-fav/:id', (req, res, next) => {
     User
         .findByIdAndUpdate(req.user.id, { $pull: { events_id: req.params.id } })
+        .then(event => res.json(event))
         .catch(err => next(new Error(err)))
 })
 

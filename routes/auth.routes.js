@@ -4,45 +4,44 @@ const passport = require('passport')
 const bcrypt = require('bcryptjs')
 const bcryptSalt = 10
 const User = require('../models/user.model')
-const { check, validationResult } = require('express-validator');
+const { check, validationResult } = require('express-validator')
 
 
 router.get('/signup', (req, res) => res.render('auth/signup'))
 
-router.post('/signup', [
+router.post('/signup',
+    [
+        check('username').isLength({ min: 3 }).withMessage('Name should have min 3 characters.').custom(value => {
+            return User.findOne({ username: value }).then(user => {
+                if (user) { return Promise.reject('Username in use') }
+            })
+        }),
 
-    check('username').isLength({ min: 3 }).withMessage('Name should have min 3 characters.').custom(value => {
-        return User.findOne({ username: value }).then(user => {
-            if (user) { return Promise.reject('Username in use') }
-        })
-    }),
+        check('email').isEmail().withMessage('Invalid email').custom(value => {
+            return User.findOne({ email: value }).then(user => {
+                if (user) { return Promise.reject('Email in use') }
+            })
+        }),
 
-    check('email').isEmail().withMessage('Invalid email').custom(value => {
-        return User.findOne({ email: value }).then(user => {
-            if (user) { return Promise.reject('Email in use') }
-        })
-    }),
+        check('password').isLength({ min: 6 }).withMessage('Password min 6 characters').matches(/\d/).withMessage('Password must contain a number')
+    ],
+    (req, res, next) => {
+        const passCheck = validationResult(req)
 
-    check('password').isLength({ min: 6 }).withMessage('Password min 6 characters').matches(/\d/).withMessage('Password must contain a number')
+        if (!passCheck.isEmpty()) {
+            res.render('auth/signup', { errorMsg: passCheck.errors })
+            return
+        }
 
-], (req, res, next) => {
-    const passCheck = validationResult(req)
+        const { username, password, email } = req.body
 
-    if (!passCheck.isEmpty()) {
-        console.log(passCheck.errors)
-        res.render('auth/signup', { errorMsg: passCheck.errors })
-        return
-    }
+        const salt = bcrypt.genSaltSync(bcryptSalt)
+        const hashPass = bcrypt.hashSync(password, salt)
 
-    const { username, password, email } = req.body
-
-    const salt = bcrypt.genSaltSync(bcryptSalt)
-    const hashPass = bcrypt.hashSync(password, salt)
-
-    User.create({ username, password: hashPass, email })
-        .then(() => res.redirect('/login'))
-        .catch(() => res.render('auth/signup', { errorMsg: 'There was an error. Please try again.' }))
-})
+        User.create({ username, password: hashPass, email })
+            .then(() => res.redirect('/login'))
+            .catch(() => res.render('auth/signup', { errorMsg: 'There was an error. Please try again.' }))
+    })
 
 router.get('/login', (req, res, next) => res.render('auth/login'))
 

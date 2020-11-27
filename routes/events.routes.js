@@ -2,49 +2,37 @@ const express = require('express')
 const router = express.Router()
 const Event = require('../models/event.model')
 const CDNupload = require('./../configs/cdn-upload.config')
-
-const isAdmin = (req, res, next) => {
-  if (req.isAuthenticated()) { req.user.isAdmin ? next() : res.render('auth/login', { errorMsg: 'Account without permissions' }) }
-  else { res.render('auth/login', { errorMsg: 'Log in first' }) }
-}
-let admin = false
+const isAdmin = require('../middlewares/custom.middlewares')
+const adminOptions = require('../utils/admin-auth')
+const addedFav = require('../utils/added-fav')
 
 
 router.get('/', (req, res, next) => {
 
-  req.isAuthenticated() ? admin = req.user.isAdmin : null
-
   const successMsg = req.query.successMsg
   Event
     .aggregate([{ $sample: { size: 40 } }])
-    .then(events => res.render('events/', { successMsg, events, isLogged: req.isAuthenticated(), admin }))
+    .then(events => res.render('events/', { successMsg, events, isLogged: req.isAuthenticated(), admin: adminOptions(req) }))
     .catch(err => next(new Error(err)))
 })
 
 router.get('/details/:id', (req, res, next) => {
 
-  req.isAuthenticated() ? admin = req.user.isAdmin : null
-
-  let added
-  if (req.isAuthenticated()) {
-    added = req.user.events_id.includes(req.params.id)
-  }
-
   Event
     .findById(req.params.id)
-    .then(event => res.render('events/details', { event, isLogged: req.isAuthenticated(), added, admin }))
+    .then(event => res.render('events/details', { event, isLogged: req.isAuthenticated(), added: addedFav(req), admin: adminOptions(req) }))
     .catch(err => next(new Error(err)))
 })
 
-router.get('/create', isAdmin, (req, res) => res.render('events/create', { isLogged: req.isAuthenticated() }))
+router.get('/create', isAdmin, (req, res) => res.render('events/create', { isLogged: req.isAuthenticated(), admin: adminOptions(req) }))
 
 router.post('/create', (req, res, next) => {
   const { name, genre, date, time, city, venue, price, currency, url, latitude, longitude, info } = req.body
 
-  name === ' ' ? res.render('events/create', { errorMsg: 'Fill name filed, please'}) : null
-  genre === '' ? res.render('events/create', { errorMsg: 'Fill genre filed, please'}) : null
+  name === ' ' ? res.render('events/create', { errorMsg: 'Fill name filed, please' }) : null
+  genre === '' ? res.render('events/create', { errorMsg: 'Fill genre filed, please' }) : null
   venue === '' ? res.render('events/create', { errorMsg: 'Fill venue filed, please' }) : null
-  
+
   Event
     .create(
       {
@@ -68,7 +56,7 @@ router.post('/create', (req, res, next) => {
 router.get('/:id/edit', isAdmin, (req, res, next) => {
   Event
     .findById(req.params.id)
-    .then(event => res.render('events/edit', { event, isLogged: req.isAuthenticated() }))
+    .then(event => res.render('events/edit', { event, isLogged: req.isAuthenticated(), admin: adminOptions(req) }))
     .catch(err => next(new Error(err)))
 })
 
