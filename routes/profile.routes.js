@@ -59,8 +59,7 @@ router.get('/profile/attend/:id', (req, res, next) => {
             })
         .then(mail => {
             let message = `Remember you are going to ${mail.name} on ${mail.dates.start.localDate} at ${mail.dates.start.localTime}. 
-                            You can always buy your tickets here: ${mail.url}.
-                            Address: ${mail._embedded.venues[0].address.line1}, ${mail._embedded.venues[0].city.name}.`
+                            You can always buy your tickets here: ${mail.url}.`
             transporter
                 .sendMail({
                     from: `"No reply" <${process.env.EMAILUSER}>`,

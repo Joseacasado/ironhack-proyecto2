@@ -1,6 +1,8 @@
 class EventsApiHandler {
     constructor() {
-        this.axiosApp = axios.create({ baseURL: `http://localhost:3000/` })
+        this.axiosApp = axios.create({
+            baseURL: `https://rutocho.herokuapp.com/`
+        })
     }
 
     getEventsList = queryString => this.axiosApp.get(`/api?${queryString}`)
