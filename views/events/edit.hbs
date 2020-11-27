@@ -8,15 +8,15 @@
             <h1>Edit event</h1>
           </div>
           {{#with event}}
-          <div class="col-md-5">
+          <div class="col-md-6">
             <button class="btn btn-outline-warning event-pic-btn">Upload Event Picture</button>
             <form method="POST" action="/events/edit/picture?id={{id}}" class="pic-form hide" enctype="multipart/form-data">
-                <div class="custom-file">
+                <div class="custom-file mt-2">
                     <input name="eventImageFile" type="file" class="custom-file-input" id="eventImageFile">
                     <label class="custom-file-label" for="imageFile">Select image</label>
                 </div>
-                <button type="submit" class="btn btn-success btn-sm">Save</button>
-                <button type="button" class="btn btn-danger btn-sm cancel-btn">Cancel</button>
+                <button type="submit" class="save-btn">Save</button>
+                <button type="button" class="cancel-btn">Cancel</button>
             </form>
           </div>
         </div>

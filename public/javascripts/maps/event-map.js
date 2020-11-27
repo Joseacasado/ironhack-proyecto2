@@ -8,7 +8,7 @@ function initApp() {
 }
 
 function drawMap() {
-  mapInstance = new google.maps.Map( document.querySelector('#eventMap'), { center: { lat: 40.392499, lng: -3.698214 }, zoom: 15 })
+  mapInstance = new google.maps.Map( document.querySelector('#eventMap'), { center: { lat: 40.392499, lng: -3.698214 }, zoom: 15, styles: mapStyles.silver })
 }
 
 function getEventLocation(id) {

@@ -2,14 +2,11 @@ const eventsListApiHandler = new EventsApiHandler()
 let resultHtml = ''
 
 
-// //    ****   LISTENERS    ****
 document.querySelector('#event-search').onsubmit = e => {
     e.preventDefault()
     applyFilters()
 }
 
-
-//    ****  FUNCTIONS   ****
 function applyFilters() {
 
     const inputs = document.querySelectorAll('#event-search .form-control')
@@ -27,7 +24,7 @@ function applyFilters() {
     eventsListApiHandler
         .getEventsList(queryString)
         .then(response => {
-            if (response.data.length === 0) {          // TO-DO ==> boostrap popups?
+            if (response.data.length === 0) {         
                 alert('No events for this search')
                 return
             }
@@ -55,24 +52,3 @@ function newFilteredHtml(response) {
     })
     document.querySelector('#card-list').innerHTML = resultHtml
 }
-
-
-//  Set Slider
-// function setSlider() {
-//   apiHandler
-//     .getSliderList()
-//     .then(response => {
-//       let allEvents = response.data._embedded.events
-//       let slidertHtml
-
-//       console.log(allEvents)
-
-//       allEvents.forEach(elm => {                  // TO-DO - Fix with GlideJS??
-//         slidertHtml += `<div class="carousel-item active">
-//                           <img src="${elm.images[1].url}" class="d-block w-100" alt="${elm.name}">
-//                         </div>`
-//       })
-//       document.querySelector('#events-carousel').innerHTML = slidertHtml
-//     })
-// }
-

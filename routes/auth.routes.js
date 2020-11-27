@@ -1,7 +1,7 @@
-const express = require("express")
+const express = require('express')
 const router = express.Router()
-const passport = require("passport")
-const bcrypt = require("bcryptjs")
+const passport = require('passport')
+const bcrypt = require('bcryptjs')
 const bcryptSalt = 10
 const User = require('../models/user.model')
 const { check, validationResult } = require('express-validator');
@@ -41,21 +41,21 @@ router.post('/signup', [
 
     User.create({ username, password: hashPass, email })
         .then(() => res.redirect('/login'))
-        .catch(() => res.render("auth/signup", { errorMsg: "There was an error. Please try again." }))
+        .catch(() => res.render('auth/signup', { errorMsg: 'There was an error. Please try again.' }))
 })
 
 router.get('/login', (req, res, next) => res.render('auth/login'))
 
-router.post("/login", passport.authenticate("local", {
-    successRedirect: "/events",
-    failureRedirect: "/login",
+router.post('/login', passport.authenticate('local', {
+    successRedirect: '/events',
+    failureRedirect: '/login',
     failureFlash: true,
     passReqToCallback: true
 }))
 
 router.get('/logout', (req, res) => {
     req.logout()
-    res.redirect("/login")
+    res.redirect('/login')
 })
 
 

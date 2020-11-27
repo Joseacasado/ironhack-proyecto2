@@ -1,14 +1,7 @@
 const eventsListApiHandler = new EventsApiHandler()
+let fav = document.querySelector('.fav')
 
-window.onload = function () {
-
-    let fav = document.querySelector('.fav')
-
-    let eventId = fav.value
-    eventsListApiHandler.addEventToList(eventId)
-
-    fav.addEventListener('click', function () {
-        fav.classList.replace('btn-outline-primary', 'btn-primary')
-    })
-
-}
+fav.addEventListener('click', function () {
+    eventsListApiHandler.addEventToList(fav.value)
+    fav.classList.replace('btn-outline-primary', 'btn-primary')
+})

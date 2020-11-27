@@ -26,6 +26,17 @@ cloudinary config ((`CLOUDINARY_NAME`), (`CLOUDINARY_KEY`), (`CLOUDINARY_SECRET`
 | /profile | `GET` | Show user profile page |
 | /profile/edit | `GET` | Show user profile edit form |
 | /profile/edit | `POST` | Edit user profile |
-| /profile/send-mail | `GET` | sends an email to the user with reminders of their favorite events |
-| /shows | `GET` | Show events list |
-| /shows/:id | `GET` | Show event details |
+| /profile/edit/picture | `POST` | Upload user image |
+| /profile/remove-fav/:id | `GET` | Add event to fav list |
+| /profile/attend/:id | `GET` | Sends an email to the user with reminders of their favorite events |
+| /events | `GET` | Show events list |
+| /events/details/:id | `GET` | Show event details |
+| /events/create | `GET` | Show event create form |
+| /events/create | `POST` | Create event |
+| /events/:id/edit | `GET` | Show event edit form |
+| /events/:id/edit | `POST` | Edit event |
+| /events/:id/delete | `POST` | Delete event |
+| /events/edit/picture | `POST` | Upload event image |
+| /api | `GET` | Aply filters and take .json from data base |
+| /api/:id | `GET` | Take .json from data base and update Gmaps marker |
+| /api/add-event/:id | `GET` | Save event to user's fav list |

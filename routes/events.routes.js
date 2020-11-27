@@ -29,8 +29,8 @@ router.post('/create', (req, res, next) => {
   const { name, genre, date, time, city, venue, price, currency, url, latitude, longitude, info } = req.body
 
   name === ' ' ? res.render('events/create', { errorMsg: 'Fill name filed, please'}) : null
-  genre === ' ' ? res.render('events/create', { errorMsg: 'Fill genre filed, please'}) : null
-  venue === ' ' ? res.render('events/create', { errorMsg: 'Fill venue filed, please' }) : null
+  genre === '' ? res.render('events/create', { errorMsg: 'Fill genre filed, please'}) : null
+  venue === '' ? res.render('events/create', { errorMsg: 'Fill venue filed, please' }) : null
   
   Event
     .create(
