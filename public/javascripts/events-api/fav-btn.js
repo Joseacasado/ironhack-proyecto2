@@ -1,14 +1,31 @@
 const eventsListApiHandler = new EventsApiHandler()
 
-window.onload = function () {
-
+if (document.querySelector('.fav')) {
     let fav = document.querySelector('.fav')
 
-    let eventId = fav.value
-    eventsListApiHandler.addEventToList(eventId)
-
     fav.addEventListener('click', function () {
-        fav.classList.replace('btn-outline-primary', 'btn-primary')
+        fav.classList.contains('btn-outline-primary') ? addFav(fav) : removeFav(fav)
     })
 
 }
+
+function addFav(btn) {
+
+    eventsListApiHandler
+        .addEventToList(btn.value)
+        .catch(err => new Error(err))
+
+    btn.classList.replace('btn-outline-primary', 'btn-primary')
+
+}
+
+function removeFav(btn) {
+
+    eventsListApiHandler
+        .removeFav(btn.value)
+        .catch(err => new Error(err))
+
+    btn.classList.replace('btn-primary', 'btn-outline-primary')
+
+}
+

@@ -22,6 +22,8 @@
             <div class="row">
                 {{#each user.events_id}}
                     {{>eventCard}}
+                    <a class="btn btn-info " href="/profile/remove-fav/{{id}}">Remove</a>
+                    <a class="btn btn-info " href="/profile/attend/{{id}}">Attend</a>
                 {{/each}}
             </div>
         </div>

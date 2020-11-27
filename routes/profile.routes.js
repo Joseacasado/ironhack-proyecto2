@@ -1,5 +1,6 @@
 const express = require('express')
 const User = require('../models/user.model')
+const Event = require('../models/event.model')
 const router = express.Router()
 const CDNupload = require('./../configs/cdn-upload.config')
 const transporter = require('../configs/nodemailer.config')
@@ -36,19 +37,33 @@ router.post('/profile/edit/picture', CDNupload.single('imageFile'), (req, res, n
         .catch(err => next(new Error(err)))
 })
 
-router.get('/profile/send-mail', (req, res, next) => {
-    const message = 'You are going to --event selected--, remember it is on --event date-- at --event location--.'
-    transporter
-        .sendMail({
-            from: `"No reply" <${process.env.EMAILUSER}>`,
-            to: req.user.email,
-            subject: "Event attending",
-            text: message,
-            html: `<b>${message}</b>`
-        })
-        .then(info => {
-            console.log(info)
-            res.redirect('/profile')
+router.get('/profile/remove-fav/:id', (req, res, next) => {
+
+    User
+        .findByIdAndUpdate(req.user.id, { $pull: { events_id: req.params.id } })
+        .then(() => res.redirect('/profile'))
+        .catch(err => next(new Error(err)))
+
+})
+
+router.get('/profile/attend/:id', (req, res, next) => {
+    Event
+        .findById(req.params.id, { "dates.start.localDate": 1, "dates.start.localTime": 1, name: 1, url: 1, "images.0.url": 1, "_embedded.venues.0.city.name": 1, "_embedded.venues.0.address.line1": 1 })
+        .then(mail => {
+            let message = `Remember you are going to ${mail.name} on ${mail.dates.start.localDate} at ${mail.dates.start.localTime}. 
+    You can always buy your tickets here: ${mail.url}.
+    Address: ${mail._embedded.venues[0].address.line1}, ${mail._embedded.venues[0].city.name}.`
+            transporter
+                .sendMail({
+                    from: `"No reply" <${process.env.EMAILUSER}>`,
+                    to: req.user.email,
+                    subject: "Event attending",
+                    text: message,
+                    html: `<b>${message}</b>`
+                })
+                .then(() => {
+                    res.redirect('/profile')
+                })
         })
         .catch(err => next(new Error(err)))
 })
