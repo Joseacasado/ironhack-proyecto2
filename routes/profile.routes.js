@@ -8,6 +8,7 @@ const adminOptions = require('../utils/admin-auth')
 
 
 router.get('/profile', (req, res) => {
+
     User
         .findById(req.user.id)
         .populate('events_id')

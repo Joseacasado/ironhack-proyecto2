@@ -54,6 +54,7 @@ router.post('/create', (req, res, next) => {
 })
 
 router.get('/:id/edit', isAdmin, (req, res, next) => {
+  req.isAuthenticated() ? admin = req.user.isAdmin : null
   Event
     .findById(req.params.id)
     .then(event => res.render('events/edit', { event, isLogged: req.isAuthenticated(), admin: adminOptions(req) }))

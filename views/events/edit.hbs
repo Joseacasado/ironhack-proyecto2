@@ -9,7 +9,7 @@
           </div>
           {{#with event}}
           <div class="col-md-6">
-            <button class="btn btn-outline-warning event-pic-btn">Upload Event Picture</button>
+            <button class="btn btn-light event-pic-btn">Upload Event Picture</button>
             <form method="POST" action="/events/edit/picture?id={{id}}" class="pic-form hide" enctype="multipart/form-data">
                 <div class="custom-file mt-2">
                     <input name="eventImageFile" type="file" class="custom-file-input" id="eventImageFile">
