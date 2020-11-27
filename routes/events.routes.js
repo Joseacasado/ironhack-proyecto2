@@ -3,27 +3,40 @@ const router = express.Router()
 const Event = require('../models/event.model')
 const CDNupload = require('./../configs/cdn-upload.config')
 
-// const isAdmin = () => (req, res, next) => req.user.isAdmin ? next() : res.render('auth/login', { errorMsg: 'You don\'t have permission to do this action' })
+const isAdmin = (req, res, next) => {
+  if (req.isAuthenticated()) { req.user.isAdmin ? next() : res.render('auth/login', { errorMsg: 'Account without permissions' }) }
+  else { res.render('auth/login', { errorMsg: 'Log in first' }) }
+}
+let admin = false
 
 
-
-// Endpoints
 router.get('/', (req, res, next) => {
+
+  req.isAuthenticated() ? admin = req.user.isAdmin : null
+
   const successMsg = req.query.successMsg
   Event
     .aggregate([{ $sample: { size: 40 } }])
-    .then(events => res.render('events/', { successMsg, events, isLogged: req.isAuthenticated() }))
+    .then(events => res.render('events/', { successMsg, events, isLogged: req.isAuthenticated(), admin }))
     .catch(err => next(new Error(err)))
 })
 
 router.get('/details/:id', (req, res, next) => {
+
+  req.isAuthenticated() ? admin = req.user.isAdmin : null
+
+  let added
+  if (req.isAuthenticated()) {
+    added = req.user.events_id.includes(req.params.id)
+  }
+
   Event
     .findById(req.params.id)
-    .then(event => res.render('events/details', { event, isLogged: req.isAuthenticated() }))
+    .then(event => res.render('events/details', { event, isLogged: req.isAuthenticated(), added, admin }))
     .catch(err => next(new Error(err)))
 })
 
-router.get('/create', (req, res) => res.render('events/create', { isLogged: req.isAuthenticated() }))
+router.get('/create', isAdmin, (req, res) => res.render('events/create', { isLogged: req.isAuthenticated() }))
 
 router.post('/create', (req, res, next) => {
   const { name, genre, date, time, city, venue, price, currency, url, latitude, longitude, info } = req.body
@@ -52,7 +65,7 @@ router.post('/create', (req, res, next) => {
     .catch(err => next(new Error(err)))
 })
 
-router.get('/:id/edit', (req, res) => {
+router.get('/:id/edit', isAdmin, (req, res, next) => {
   Event
     .findById(req.params.id)
     .then(event => res.render('events/edit', { event, isLogged: req.isAuthenticated() }))
@@ -78,17 +91,17 @@ router.post('/:id/edit', (req, res, next) => {
         '_embedded.venues.0.location.latitude': latitude,
         '_embedded.venues.0.location.longitude': longitude
       })
-    .then(() => res.redirect(`/events/details/${ eventId }`))
+    .then(() => res.redirect(`/events/details/${eventId}`))
     .catch(err => next(new Error(err)))
 })
 
 router.post('/edit/picture', CDNupload.single('eventImageFile'), (req, res, next) => {
-    const eventId = req.query.id
-    const imageUrl = req.file.path
-    Event
-        .findByIdAndUpdate(eventId, { 'images.0.url': imageUrl })
-        .then(() => res.redirect(`/events/details/${ eventId }`))
-        .catch(err => next(new Error(err)))
+  const eventId = req.query.id
+  const imageUrl = req.file.path
+  Event
+    .findByIdAndUpdate(eventId, { 'images.0.url': imageUrl })
+    .then(() => res.redirect(`/events/details/${eventId}`))
+    .catch(err => next(new Error(err)))
 })
 
 

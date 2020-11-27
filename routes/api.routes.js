@@ -3,11 +3,25 @@ const router = express.Router()
 const User = require('../models/user.model')
 const Event = require('../models/event.model')
 
-//  Search api route
+
 router.put('/add-event/:id', (req, res, next) => {
 
     User
         .findByIdAndUpdate(req.user.id, { $push: { events_id: req.params.id } })
+        .catch(err => next(new Error(err)))
+})
+
+router.delete('/remove-fav/:id', (req, res, next) => {
+    User
+        .findByIdAndUpdate(req.user.id, { $pull: { events_id: req.params.id } })
+        .catch(err => next(new Error(err)))
+})
+
+
+router.get('/:id', (req, res, next) => {
+    Event
+        .findById(req.params.id)
+        .then(event => res.json(event))
         .catch(err => next(new Error(err)))
 })
 
@@ -24,14 +38,5 @@ router.get('/', (req, res, next) => {
         .then(event => res.json(event))
         .catch(err => next(new Error(err)))
 })
-
-//  getEventDetails
-router.get('/:id', (req, res, next) => {
-    Event
-        .findById(req.params.id)
-        .then(event => res.json(event))
-        .catch(err => next(new Error(err)))
-})
-
 
 module.exports = router

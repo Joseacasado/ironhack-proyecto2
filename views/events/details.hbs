@@ -1,39 +1,53 @@
 <div class="container">
   <div id="eventDetailsContainer">
-    <div class="row mt-4 justify-content-center align-items-center">
+    <div class="row justify-content-center align-items-center">
 
-          <div class="col-md-4 event-details-img">
-            {{#with event}}
-            <figure><img src="{{images.0.url}}" alt="{{name}}"></figure>
-            <figcaption></figcaption>
-          </div>
+      <div class="col-md-4 event-details-img">
+        {{#with event}}
+        <figure><img src="{{images.0.url}}" alt="{{name}}"></figure>
+        <figcaption></figcaption>
+        {{/with}}
+      </div>
 
-          <div class="col-md-8">
-            <h2>{{name}} <button class="btn btn-sm btn-outline-primary fav" value="{{_id}}">♥</button></h2>
-            
-            <hr>
-            <ul>
-              <li>Date: {{dates.start.localDate}}</li>
-              <li>Venue: {{_embedded.venues.0.name}}</li>
-              <li>City: {{_embedded.venues.0.city.name}}</li>
-              <li>Price: {{priceRanges.0.max}} - {{priceRanges.0.currency}}</li>
-            </ul>
-            <hr>
-            <p><strong>Description:</strong> {{info}}</p>
-            <hr>
-            <div class="edit-buttons">
+      <div class="col-md-8">
+        <h2>
+          {{event.name}}
+          {{#if isLogged}}
+          {{#if added}}
+          <button class="btn btn-sm btn-primary fav" value="{{event.id}}">♥</button>
+          {{/if}}
+          {{#unless added}}
+          <button class="btn btn-sm btn-outline-primary fav" value="{{event.id}}">♥</button>
+          {{/unless}}
+          {{/if}}
+        </h2>
+      </div>
 
-              <a class="buy-btn" href="{{url}}" target="_blank">Buy tickets</a>
-              {{/with}}
-              
-              {{#if isLogged}}
-              <a class="edit-btn" href="/events/{{event.id}}/edit">Edit event</a>
+        <hr>
 
-              <!-- Button trigger modal -->
-              <button type="button" class="delete-btn" data-toggle="modal" data-target="#staticBackdrop">
-                Delete event
-              </button>
-            </div>
+        {{#with event}}
+        <ul>
+          <li>Date: {{dates.start.localDate}}</li>
+          <li>Venue: {{_embedded.venues.0.name}}</li>
+          <li>City: {{_embedded.venues.0.city.name}}</li>
+          <li>Price: {{priceRanges.0.max}} - {{priceRanges.0.currency}}</li>
+        </ul>
+        <hr>
+        <p><strong>Description:</strong> {{info}}</p>
+        <hr>
+        <div class="edit-buttons">
+
+          <a class="buy-btn" href="{{url}}" target="_blank">Buy tickets</a>
+          {{/with}}
+
+          {{#if admin}}
+          <a class="edit-btn" href="/events/{{event.id}}/edit">Edit event</a>
+
+          <!-- Button trigger modal -->
+          <button type="button" class="delete-btn" data-toggle="modal" data-target="#staticBackdrop">
+          Delete event
+          </button>
+        </div>
 
         <!-- Modal -->
         <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1"
@@ -72,10 +86,7 @@
 
 </div>
 
-
-
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-
 <script src="/javascripts/events-api/api-handler.js"></script>
 <script src="/javascripts/maps/styles.js"></script>
 <script src="/javascripts/maps/event-map.js"></script>
