@@ -90,7 +90,12 @@ ul {
   background: #000000;  /* fallback for old browsers */
   background: -webkit-linear-gradient(to right, #434343, #000000);  /* Chrome 10-25, Safari 5.1-6 */
   background: linear-gradient(to right, #434343, #000000); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background-image: url('https://images.unsplash.com/photo-1471877325906-aee7c2240b5f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1500&q=80');
+  background-position: center;;
+  background-size: cover;;
+  background-repeat: no-repeat;
   opacity: .8;
+  animation: fade 4s 500ms;
 }
 
 .successMsg {
@@ -156,6 +161,15 @@ ul {
       object-fit: cover;
     }
   }
+}
+
+#profile-img-id {
+  width: 150px; 
+  background-color: aliceblue;
+}
+
+.fav-list {
+  text-align: center;
 }
 
 footer {
@@ -232,11 +246,11 @@ footer {
 }
 
 .buy-btn {
-  @include buy-btn(#965c06)
+  @include buy-btn(#3d3336)
 }
 
 .edit-btn {
-  @include edit-btn(#7daa00)
+  @include edit-btn(#638600)
 }
 
 .delete-btn {
@@ -249,4 +263,14 @@ footer {
 
 .cancel-btn {
   @include cancel-btn(rgb(156, 0, 0))
+}
+
+@-webkit-keyframes fade {
+    from {opacity: 0;}
+    to {opacity: .8;}
+} 
+
+@keyframes fade {
+    from {opacity: 0;}
+    to {opacity: .8;}
 }

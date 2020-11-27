@@ -4,24 +4,35 @@
 
         <div class="col-md-7 custom-forms">
 
-            <h1>Edit Profile</h1>
+            <header>
+                <div class="row justify-content-center align-items-center">
+                    <div class="col-md-5">
+                        <h1>Edit Profile</h1>
+                    </div>
 
-            <button class="btn btn-warning" id="profile-pic-btn">Upload Profile Picture</button>
+                    <div class="col-md-7 text-center">
+                        <figure>
+                            <img id="profile-img-id" src="{{user.avatar}}"
+                                alt="{{user.username}}">
+                        </figure>
+                        <button class="btn btn-light" id="profile-pic-btn">Upload Profile Picture</button>
 
-            <form method="POST" action="/profile/edit/picture" class="pic-form hide" enctype="multipart/form-data">
-                <div class="custom-file">
-                    <input name="imageFile" type="file" class="custom-file-input" id="imageFile">
-                    <label class="custom-file-label" for="imageFile">Select image</label>
+                        <form method="POST" action="/profile/edit/picture" class="pic-form hide" enctype="multipart/form-data">
+                            <div class="custom-file">
+                                <input name="imageFile" type="file" class="custom-file-input" id="imageFile">
+                                <label class="custom-file-label" for="imageFile">Select image</label>
+                            </div>
+                            <button type="submit" class="save-btn">Save</button>
+                            <button type="button" class="cancel-btn">Cancel</button>
+                        </form>
+                    </div>
                 </div>
-                <button type="submit" class="save-btn">Save</button>
-                <button type="button" class="cancel-btn">Cancel</button>
-            </form>
+            </header>
+
+
 
             <form method="POST" action="/profile/edit">
-                <figure>
-                    <img src="{{user.avatar}}" style="width: 200px; background-color: aliceblue;"
-                        alt="{{user.username}}">
-                </figure>
+                
                 <div class="form-group">
                     <label>Fullname</label>
                     <input type="text" class="form-control" name="fullname" value="{{user.fullname}}">

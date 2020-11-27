@@ -80,7 +80,12 @@ ul {
   /* Chrome 10-25, Safari 5.1-6 */
   background: linear-gradient(to right, #434343, #000000);
   /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-  opacity: .8; }
+  background-image: url("https://images.unsplash.com/photo-1471877325906-aee7c2240b5f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1500&q=80");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  opacity: .8;
+  animation: fade 4s 500ms; }
 
 .successMsg {
   text-align: center;
@@ -133,6 +138,13 @@ ul {
     background-color: aliceblue;
     object-fit: cover; }
 
+#profile-img-id {
+  width: 150px;
+  background-color: aliceblue; }
+
+.fav-list {
+  text-align: center; }
+
 footer {
   width: 100%;
   margin-top: 2rem;
@@ -160,7 +172,7 @@ footer {
   color: white;
   font-weight: 700;
   box-shadow: 0 0 4px rgba(255, 255, 200, 0.5);
-  background-color: #965c06; }
+  background-color: #3d3336; }
   .buy-btn:hover {
     text-decoration: none;
     color: white; }
@@ -173,7 +185,7 @@ footer {
   color: white;
   font-weight: 700;
   box-shadow: 0 0 4px rgba(255, 255, 200, 0.5);
-  background-color: #7daa00; }
+  background-color: #638600; }
   .edit-btn:hover {
     text-decoration: none;
     color: white; }
@@ -223,5 +235,17 @@ footer {
   .cancel-btn:hover {
     text-decoration: none;
     color: white; }
+
+@-webkit-keyframes fade {
+  from {
+    opacity: 0; }
+  to {
+    opacity: .8; } }
+
+@keyframes fade {
+  from {
+    opacity: 0; }
+  to {
+    opacity: .8; } }
 
 /*# sourceMappingURL=style.css.map */

@@ -3,6 +3,10 @@
 
         <div class="col-md-4 user-info">
 
+            <h2>Profile</h2>
+
+            <hr>
+
             <figure>
                 <img src="{{user.avatar}}" alt="{{user.name}} ">
             </figure>
@@ -18,6 +22,11 @@
         </div>
 
         <div class="col-md-6 fav-list">
+
+            <h2>Your events</h2>
+
+            <hr>
+
             <div class="row justify-content-center">
                 {{#each user.events_id}}
                     <div class="col-3 col-lg-3">

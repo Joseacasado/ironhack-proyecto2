@@ -36,7 +36,10 @@ router.get('/details/:id', (req, res, next) => {
     .catch(err => next(new Error(err)))
 })
 
-router.get('/create', isAdmin, (req, res) => res.render('events/create', { isLogged: req.isAuthenticated() }))
+router.get('/create', isAdmin, (req, res) => {
+  req.isAuthenticated() ? admin = req.user.isAdmin : null
+  res.render('events/create', { admin, isLogged: req.isAuthenticated() })
+})
 
 router.post('/create', (req, res, next) => {
   const { name, genre, date, time, city, venue, price, currency, url, latitude, longitude, info } = req.body
@@ -66,9 +69,10 @@ router.post('/create', (req, res, next) => {
 })
 
 router.get('/:id/edit', isAdmin, (req, res, next) => {
+  req.isAuthenticated() ? admin = req.user.isAdmin : null
   Event
     .findById(req.params.id)
-    .then(event => res.render('events/edit', { event, isLogged: req.isAuthenticated() }))
+    .then(event => res.render('events/edit', { event, admin, isLogged: req.isAuthenticated() }))
     .catch(err => next(new Error(err)))
 })
 

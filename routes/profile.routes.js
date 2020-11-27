@@ -5,16 +5,23 @@ const router = express.Router()
 const CDNupload = require('./../configs/cdn-upload.config')
 const transporter = require('../configs/nodemailer.config')
 
+let admin = false
+
 
 router.get('/profile', (req, res) => {
+    req.isAuthenticated() ? admin = req.user.isAdmin : null
+
     User
         .findById(req.user.id)
         .populate('events_id')
-        .then(user => res.render('profile/', { user, isLogged: req.isAuthenticated() }))
+        .then(user => res.render('profile/', { user, admin, isLogged: req.isAuthenticated() }))
         .catch(err => next(new Error(err)))
 })
 
-router.get('/profile/edit', (req, res, next) => res.render('profile/edit', { user: req.user, isLogged: req.isAuthenticated() }))
+router.get('/profile/edit', (req, res, next) => {
+    req.isAuthenticated() ? admin = req.user.isAdmin : null
+    res.render('profile/edit', { user: req.user, admin, isLogged: req.isAuthenticated() })
+})
 
 router.post('/profile/edit', (req, res, next) => {
 
