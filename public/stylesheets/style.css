@@ -28,7 +28,7 @@ ul {
   padding: 0; }
 
 .navbar {
-  padding: 1rem 2rem;
+  padding: .4rem 2rem;
   background: #2b2f2f; }
 
 .tm-hero {
@@ -60,7 +60,8 @@ ul {
     #user-cards .card-body p {
       margin: 3px; }
     #user-cards .card-body a {
-      margin-top: 20px; }
+      margin-top: 10px;
+      color: black; }
 
 #eventDetailsContainer {
   color: #000000; }
@@ -78,7 +79,8 @@ ul {
   background: -webkit-linear-gradient(to right, #434343, #000000);
   /* Chrome 10-25, Safari 5.1-6 */
   background: linear-gradient(to right, #434343, #000000);
-  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */ }
+  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  opacity: .8; }
 
 .successMsg {
   text-align: center;
@@ -134,7 +136,8 @@ ul {
 footer {
   width: 100%;
   margin-top: 2rem;
-  background: #2b2f2f; }
+  background: #2b2f2f;
+  opacity: .7; }
   footer ul {
     display: flex;
     justify-content: center;

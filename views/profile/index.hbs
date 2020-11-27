@@ -13,7 +13,6 @@
             <div class="btn-group" role="group" aria-label="Basic example">
                 <a href="/profile/edit" class="btn btn-dark btn-lg">Edit</a>
                 <a href="/logout" class="btn btn-dark btn-lg">Log out</a>
-                <a href="/profile/send-mail" class="btn btn-dark btn-lg">Attend</a>
             </div>
             
         </div>
@@ -27,8 +26,10 @@
                             <div class="card-body">
                                 <p class="text-truncate"><strong>{{name}}</strong></p>
                                 <p>{{dates.start.localDate}} || {{dates.start.localTime}} h.</p>
-                                <a href="/profile/remove-fav/{{id}}" class="btn btn-sm btn-dark d-block">remove</a>
-                                <a href="/profile/attend/{{id}}" class="btn btn-sm btn-info d-block ">Attend</a>
+                                <hr>
+                                <a href="/profile/attend/{{id}}" class="">Attend</a>
+                                || 
+                                <a href="/profile/remove-fav/{{id}}" class="">Remove</a> 
                             </div>
                         </div>
                     </div>

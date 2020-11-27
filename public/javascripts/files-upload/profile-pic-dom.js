@@ -3,7 +3,7 @@ window.onload = function () {
         document.querySelector('.pic-form').classList.remove('hide')
     })
 
-    document.querySelector('.btn-danger').addEventListener('click', function () {
+    document.querySelector('.cancel-btn').addEventListener('click', function () {
         document.querySelector('.pic-form').classList.add('hide')
     })
 
