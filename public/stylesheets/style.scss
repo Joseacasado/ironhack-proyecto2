@@ -183,19 +183,15 @@ footer {
     align-items: center;
     color: white;
   }
-  li {
-    margin-left: 3rem;
-  }
   img {
-    width: 35px;
+    width: 20px;
   }
   a {
     color: white;
     &:hover {
-      text-decoration: none;
+      color: white;
     }
   }
-
 }
 
 @mixin custom-button {

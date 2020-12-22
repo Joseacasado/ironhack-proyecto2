@@ -2,36 +2,29 @@ const express = require('express')
 const router = express.Router()
 const Event = require('../models/event.model')
 const CDNupload = require('./../configs/cdn-upload.config')
-const isAdmin = require('../middlewares/custom.middlewares')
-const adminOptions = require('../utils/admin-auth')
-const addedFav = require('../utils/added-fav')
+const { isLoggedIn, isAdmin } = require('../middlewares/custom.middlewares')
+const { addedFav, adminOptions } = require('../utils/utils')
 
 
 router.get('/', (req, res, next) => {
-
   const successMsg = req.query.successMsg
   Event
-    .aggregate([{ $sample: { size: 40 } }])
+    .aggregate([{ $sample: { size: 40 } }, { $project: { name: 1, 'images.url': 1, 'dates.start.localDate': 1, 'dates.start.localTime': 1, '_embedded.venues.name': 1, '_embedded.venues.city.name': 1 } }])
     .then(events => res.render('events/', { successMsg, events, isLogged: req.isAuthenticated(), admin: adminOptions(req) }))
     .catch(err => next(new Error(err)))
 })
 
 router.get('/details/:id', (req, res, next) => {
-
   Event
-    .findById(req.params.id)
+    .findById(req.params.id, { name: 1, 'images.url': 1, 'dates.start.localDate': 1, 'dates.start.localTime': 1, '_embedded.venues.name': 1, '_embedded.venues.city.name': 1, url: 1, info: 1, '_embedded.venues.location': 1, priceRanges: 1 })
     .then(event => res.render('events/details', { event, isLogged: req.isAuthenticated(), added: addedFav(req), admin: adminOptions(req) }))
     .catch(err => next(new Error(err)))
 })
 
-router.get('/create', isAdmin, (req, res) => res.render('events/create', { isLogged: req.isAuthenticated(), admin: adminOptions(req) }))
+router.get('/create', isLoggedIn, isAdmin, (req, res) => res.render('events/create', { isLogged: req.isAuthenticated(), admin: adminOptions(req) }))
 
 router.post('/create', (req, res, next) => {
   const { name, genre, date, time, city, venue, price, currency, url, latitude, longitude, info } = req.body
-
-  name === ' ' ? res.render('events/create', { errorMsg: 'Fill name filed, please' }) : null
-  genre === '' ? res.render('events/create', { errorMsg: 'Fill genre filed, please' }) : null
-  venue === '' ? res.render('events/create', { errorMsg: 'Fill venue filed, please' }) : null
 
   Event
     .create(
@@ -53,7 +46,7 @@ router.post('/create', (req, res, next) => {
     .catch(err => next(new Error(err)))
 })
 
-router.get('/:id/edit', isAdmin, (req, res, next) => {
+router.get('/:id/edit', isLoggedIn, isAdmin, (req, res, next) => {
   req.isAuthenticated() ? admin = req.user.isAdmin : null
   Event
     .findById(req.params.id)
@@ -92,7 +85,6 @@ router.post('/edit/picture', CDNupload.single('eventImageFile'), (req, res, next
     .then(() => res.redirect(`/events/details/${eventId}`))
     .catch(err => next(new Error(err)))
 })
-
 
 router.post('/:id/delete', (req, res, next) => {
   Event

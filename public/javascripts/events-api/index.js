@@ -44,7 +44,8 @@ function newFilteredHtml(response) {
                       <img src="${elm.images[0].url}" class="card-img-top" alt="${elm.name}">
                       <div class="card-body">
                         <h5 class="card-title">${elm.name}</h5>
-                        <p class="card-text">${elm.dates.start.localDate} || ${elm._embedded.venues[0].name}</p>
+                        <p class="card-text">${elm.dates.start.localDate } || ${ elm.dates.start.localTime}</p>
+                        <p>${ elm._embedded.venues[0].name} – ${elm._embedded.venues[0].city.name}</p>
                         <a href="/events/details/${elm._id}" class="btn btn-dark d-block event-details-btn">See more</a> 
                       </div>
                     </div>

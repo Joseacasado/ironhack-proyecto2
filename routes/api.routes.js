@@ -5,7 +5,6 @@ const Event = require('../models/event.model')
 
 
 router.put('/add-event/:id', (req, res, next) => {
-
     User
         .findByIdAndUpdate(req.user.id, { $push: { events_id: req.params.id } })
         .then(event => res.json(event))
@@ -22,7 +21,7 @@ router.delete('/remove-fav/:id', (req, res, next) => {
 
 router.get('/:id', (req, res, next) => {
     Event
-        .findById(req.params.id)
+        .findById(req.params.id, { name: 1, 'images.url': 1, 'dates.start.localDate': 1, 'dates.start.localTime': 1, '_embedded.venues.name': 1, '_embedded.venues.city.name': 1, url: 1, info: 1, '_embedded.venues.location': 1, priceRanges: 1 })
         .then(event => res.json(event))
         .catch(err => next(new Error(err)))
 })
@@ -36,7 +35,10 @@ router.get('/', (req, res, next) => {
     const regex = { name: new RegExp(name, 'i'), city: new RegExp(city, 'i'), genre: new RegExp(genre, 'i') }
 
     Event
-        .find({ name: regex.name, "classifications.genre.name": regex.genre, "_embedded.venues.city.name": regex.city, "priceRanges.max": { $lte: priceMax }, "priceRanges.min": { $gte: priceMin } })
+        .find(
+            { name: regex.name, "classifications.genre.name": regex.genre, "_embedded.venues.city.name": regex.city, "priceRanges.max": { $lte: priceMax }, "priceRanges.min": { $gte: priceMin } },
+            { name: 1, 'images.url': 1, 'dates.start.localDate': 1, 'dates.start.localTime': 1, '_embedded.venues.name': 1, '_embedded.venues.city.name': 1 }
+        )
         .then(event => res.json(event))
         .catch(err => next(new Error(err)))
 })

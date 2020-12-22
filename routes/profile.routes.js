@@ -4,14 +4,13 @@ const Event = require('../models/event.model')
 const router = express.Router()
 const CDNupload = require('./../configs/cdn-upload.config')
 const transporter = require('../configs/nodemailer.config')
-const adminOptions = require('../utils/admin-auth')
+const { adminOptions } = require('../utils/utils')
 
 
 router.get('/profile', (req, res) => {
-
     User
-        .findById(req.user.id)
-        .populate('events_id')
+        .findById(req.user.id, { username: 1, fullname: 1, email: 1, avatar: 1, events_id: 1 })
+        .populate({ path: 'events_id', select: ['name', 'images.url', 'dates.start.localDate', 'dates.start.localTime' ]})
         .then(user => res.render('profile/', { user, isLogged: req.isAuthenticated(), admin: adminOptions(req) }))
         .catch(err => next(new Error(err)))
 })
@@ -19,7 +18,6 @@ router.get('/profile', (req, res) => {
 router.get('/profile/edit', (req, res, next) => res.render('profile/edit', { user: req.user, isLogged: req.isAuthenticated(), admin: adminOptions(req) }))
 
 router.post('/profile/edit', (req, res, next) => {
-
     const { fullname, username, email } = req.body
 
     User
@@ -29,7 +27,6 @@ router.post('/profile/edit', (req, res, next) => {
 })
 
 router.post('/profile/edit/picture', CDNupload.single('imageFile'), (req, res, next) => {
-
     const avatar = req.file.path
 
     User
@@ -39,7 +36,6 @@ router.post('/profile/edit/picture', CDNupload.single('imageFile'), (req, res, n
 })
 
 router.get('/profile/remove-fav/:id', (req, res, next) => {
-
     User
         .findByIdAndUpdate(req.user.id, { $pull: { events_id: req.params.id } })
         .then(() => res.redirect('/profile'))
@@ -59,9 +55,9 @@ router.get('/profile/attend/:id', (req, res, next) => {
                 "_embedded.venues.0.city.name": 1,
                 "_embedded.venues.0.address.line1": 1
             })
-        .then(mail => {
-            let message = `Remember you are going to ${mail.name} on ${mail.dates.start.localDate} at ${mail.dates.start.localTime}. 
-                            You can always buy your tickets here: ${mail.url}.`
+        .then(event => `Remember you are going to ${event.name} on ${event.dates.start.localDate} at ${event.dates.start.localTime}. 
+                            You can always buy your tickets here: ${event.url}.`)
+        .then(message => {
             transporter
                 .sendMail({
                     from: `"No reply" <${process.env.EMAILUSER}>`,
@@ -70,10 +66,8 @@ router.get('/profile/attend/:id', (req, res, next) => {
                     text: message,
                     html: `<b>${message}</b>`
                 })
-                .then(() => {
-                    res.redirect('/profile')
-                })
         })
+        .then(() => res.redirect('/profile'))
         .catch(err => next(new Error(err)))
 })
 

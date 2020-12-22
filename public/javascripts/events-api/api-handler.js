@@ -2,6 +2,7 @@ class EventsApiHandler {
     constructor() {
         this.axiosApp = axios.create({
             baseURL: `https://rutocho.herokuapp.com/`
+            // baseURL: `http://localhost:3000/`
         })
     }
 
@@ -9,5 +10,4 @@ class EventsApiHandler {
     getEventDetails = id => this.axiosApp.get(`/api/${id}`)
     addEventToList = id => this.axiosApp.put(`/api/add-event/${id}`)
     removeFav = id => this.axiosApp.delete(`/api/remove-fav/${id}`)
-
 }

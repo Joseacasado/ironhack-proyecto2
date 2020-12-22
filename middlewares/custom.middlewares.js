@@ -1,9 +1,4 @@
-const isAdmin = (req, res, next) => {
-    if (req.isAuthenticated()) { req.user.isAdmin ? next() : res.render('auth/login', { errorMsg: 'Account without permissions' }) }
-    else { res.render('auth/login', { errorMsg: 'Log in first' }) }
+module.exports = {
+    isLoggedIn: (req, res, next) => req.isAuthenticated() ? next() : res.render('auth/login', { errorMsg: 'Log in first' }),
+    isAdmin: (req, res, next) => req.user.isAdmin ? next() : res.render('auth/login', { errorMsg: 'Account without permissions' })
 }
-
-module.exports = isAdmin
-
-
-
